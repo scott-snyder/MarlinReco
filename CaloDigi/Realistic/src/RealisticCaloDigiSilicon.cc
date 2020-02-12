@@ -31,7 +31,7 @@ float RealisticCaloDigiSilicon::convertEnergy( float energy, int inUnit ) { // c
   if      ( inUnit==MIP ) return energy;
   else if ( inUnit==GEVDEP ) return energy/_calib_mip;
   else streamlog_out (ERROR) << "RealisticCaloDigiSilicon::convertEnergy - unknown unit " << inUnit << std::endl;
-  assert (0);
+  std::abort();
 }
 
 
