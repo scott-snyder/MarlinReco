@@ -157,7 +157,7 @@ void TauFinder::processEvent( LCEvent * evt )
 
   try {
     colRECO = evt->getCollection( _incol ) ;
-  } catch (Exception e) {
+  } catch (const Exception& e) {
     colRECO = 0;
   }
  

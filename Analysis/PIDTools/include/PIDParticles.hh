@@ -80,9 +80,9 @@ static const PIDParticle_base protonProperties("proton", 2212, .938272, BBparsPr
 class LLPIDHypothesis : public PIDParticle_base {
 public:
 
-  LLPIDHypothesis (const char *_name, int _pdg, double _mass,
-               float _prior, const double* _BBpars) :
-    PIDParticle_base(_name, _pdg, _mass, _BBpars),
+  LLPIDHypothesis (const char *name, int pdg_, double mass_,
+               float _prior, const double* BBpars) :
+    PIDParticle_base(name, pdg_, mass_, BBpars),
     prior(_prior), _posterior(0), _logL(0), _threshold(0)
   {  }
 
@@ -118,8 +118,8 @@ private:
 class MVAPIDHypothesis : public PIDParticle_base {
 public:
 
-  MVAPIDHypothesis (const char *_name, int _pdg, double _mass, const double* _BBpars, const float mvaCut=0.) :
-    PIDParticle_base(_name, _pdg, _mass, _BBpars),
+  MVAPIDHypothesis (const char *name_, int pdg_, double mass_, const double* BBpars_, const float mvaCut=0.) :
+    PIDParticle_base(name_, pdg_, mass_, BBpars_),
     _mva(0), _q(0), _sigAbove(0), _mvaCut(mvaCut), _reader(new TMVA::Reader("Silent")),
     _histoQ(NULL), _histoSig(NULL), _histoBkg(NULL)
   {  }
@@ -135,7 +135,7 @@ public:
   float GetMVAout() const { return _mva; }
   float GetQ() const { return _q; }
   float GetSigAbove() const { return _sigAbove; }
-  const float GetMVAcut() const { return _mvaCut; }
+  float GetMVAcut() const { return _mvaCut; }
 
 
   void AddMVAVariable( const TString& name, Float_t* ptr)
