@@ -105,7 +105,10 @@ void EMShowerFinder::init() {
   printParameters();
 
   // FIXME: hard coded cell id's for old Mokka (e.g. Mokka v5.4) versions)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
   CellIDDecoder<CalorimeterHit>::setDefaultEncoding("M:3,S-1:3,I:9,J:9,K-1:6");
+#pragma GCC diagnostic pop
 
 
   // debug

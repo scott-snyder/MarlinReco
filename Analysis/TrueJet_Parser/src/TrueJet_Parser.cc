@@ -64,12 +64,12 @@ double TrueJet_Parser::Etrue(int ijet) {
   return E;
 }
 double TrueJet_Parser::Mtrue(int ijet) {
-  const double* p4 = p4true(ijet);
+  const double* p4_ = p4true(ijet);
   double psqr=0;
   for (int kk=1 ; kk<=3 ; kk++ ) {
-     psqr+=p4[kk]*p4[kk];
+     psqr+=p4_[kk]*p4_[kk];
   }
-  double M=sqrt(p4[0]*p4[0]-psqr);
+  double M=sqrt(p4_[0]*p4_[0]-psqr);
   return M ;
 }
 const double* TrueJet_Parser::ptrue(int ijet) {
@@ -83,15 +83,15 @@ const double* TrueJet_Parser::ptrue(int ijet) {
     if ( _COUNT_FSR ) {
       if (  abs(www[kk]) == 1.0) {
         const double* mom = mcp->getMomentum();
-        for (int kk=0 ; kk<3 ; kk++ ) {
-          p3[kk]+=mom[kk];
+        for (int ll=0 ; ll<3 ; ll++ ) {
+          p3[ll]+=mom[ll];
         }
       }
     } else {
       if (  www[kk] == 1.0) {
         const double* mom = mcp->getMomentum();
-        for (int kk=0 ; kk<3 ; kk++ ) {
-          p3[kk]+=mom[kk];
+        for (int ll=0 ; ll<3 ; ll++ ) {
+          p3[ll]+=mom[ll];
         }
       }
     }
@@ -135,7 +135,7 @@ double TrueJet_Parser::Etrueseen(int ijet) {
     try{
      rmclcol = evt->getCollection( get_recoMCTruthLink() );
     }
-    catch( lcio::DataNotAvailableException e )
+    catch( const lcio::DataNotAvailableException& e )
     {
       streamlog_out(WARNING) << get_recoMCTruthLink()   << " collection not available" << std::endl;
         rmclcol = NULL;
@@ -154,10 +154,10 @@ double TrueJet_Parser::Etrueseen(int ijet) {
   return E;
 }
 double TrueJet_Parser::Mtrueseen(int ijet) {
-  const double* p4 = p4trueseen(ijet);
+  const double* p4_ = p4trueseen(ijet);
   double psqr=0;
   for (int kk=1 ; kk<=3 ; kk++ ) {
-     psqr+=p4[kk]*p4[kk];
+     psqr+=p4_[kk]*p4_[kk];
   }
   double M=sqrt(p4[0]*p4[0]-psqr);
   return M ;
@@ -168,7 +168,7 @@ const double* TrueJet_Parser::ptrueseen(int ijet) {
      try{
       rmclcol = evt->getCollection( get_recoMCTruthLink() );
     }
-    catch( lcio::DataNotAvailableException e )
+    catch( const lcio::DataNotAvailableException& e )
     {
       streamlog_out(WARNING) << get_recoMCTruthLink()   << " collection not available" << std::endl;
         rmclcol = NULL;
@@ -183,8 +183,8 @@ const double* TrueJet_Parser::ptrueseen(int ijet) {
     LCObjectVec recovec = reltrue_tj->getRelatedFromObjects( mcp);
     if ( recovec.size() > 0 ) { // if reconstructed
       const double* mom = mcp->getMomentum();
-      for (int kk=0 ; kk<3 ; kk++ ) {
-        p3[kk]+=mom[kk];
+      for (int ll=0 ; ll<3 ; ll++ ) {
+        p3[ll]+=mom[ll];
       }
     }
   }
@@ -259,7 +259,7 @@ const IntVec&  TrueJet_Parser::final_siblings( int ijet ) {
   LCObjectVec fcnvec = relfcn->getRelatedToObjects( jets->at(ijet) );
   int nsibl=0;
   for ( unsigned kk=0 ; kk<fcnvec.size() ; kk++ ) {
-    ReconstructedParticleVec jetvec= dynamic_cast<ReconstructedParticle*>(fcnvec[kk])->getParticles();
+    ReconstructedParticleVec jetvec= dynamic_cast<ReconstructedParticle&>(*fcnvec[kk]).getParticles();
     for ( unsigned jj=0 ; jj<jetvec.size() ; jj++ ) {
       if ( jetvec[jj] != jets->at(ijet) ) {
         // sibling
@@ -279,7 +279,7 @@ const IntVec& TrueJet_Parser::initial_siblings( int ijet ){
   LCObjectVec icnvec = relicn->getRelatedToObjects( jets->at(ijet) );
   int nsibl=0;
   for ( unsigned kk=0 ; kk<icnvec.size() ; kk++ ) {
-    ReconstructedParticleVec jetvec= dynamic_cast<ReconstructedParticle*>(icnvec[kk])->getParticles();
+    ReconstructedParticleVec jetvec= dynamic_cast<ReconstructedParticle&>(*icnvec[kk]).getParticles();
     for ( unsigned jj=0 ; jj<jetvec.size() ; jj++ ) {
       if ( jetvec[jj] != jets->at(ijet) ) {
         int jjet=jetvec[jj]->ext<JetIndex>();
@@ -467,7 +467,7 @@ void TrueJet_Parser::getall( LCEvent * event ) {
     try{
       tjcol = evt->getCollection( _trueJetCollectionName);
     }
-    catch( lcio::DataNotAvailableException e )
+    catch( const lcio::DataNotAvailableException& e )
     {
       streamlog_out(WARNING) <<    _trueJetCollectionName  << " collection not available 1" << std::endl;
       tjcol = NULL;
@@ -479,7 +479,7 @@ void TrueJet_Parser::getall( LCEvent * event ) {
     try{
       fcncol = evt->getCollection( _finalColourNeutralCollectionName);
     }
-    catch( lcio::DataNotAvailableException e )
+    catch( const lcio::DataNotAvailableException& e )
     {
         streamlog_out(WARNING) <<    _finalColourNeutralCollectionName << " collection not available" << std::endl;
         fcncol = NULL;
@@ -491,7 +491,7 @@ void TrueJet_Parser::getall( LCEvent * event ) {
     try{
       icncol = evt->getCollection( _initialColourNeutralCollectionName);
     }
-    catch( lcio::DataNotAvailableException e )
+    catch( const lcio::DataNotAvailableException& e )
     {
         streamlog_out(WARNING) <<    _initialColourNeutralCollectionName << " collection not available" << std::endl;
         icncol = NULL;
@@ -504,7 +504,7 @@ void TrueJet_Parser::getall( LCEvent * event ) {
     try{
       fcnlcol  = evt->getCollection(  _finalColourNeutralLink );
     }
-    catch( lcio::DataNotAvailableException e )
+    catch( const lcio::DataNotAvailableException& e )
     {
         streamlog_out(WARNING) <<  _finalColourNeutralLink   << " collection not available" << std::endl;
         fcnlcol  = NULL;
@@ -516,7 +516,7 @@ void TrueJet_Parser::getall( LCEvent * event ) {
     try{
       icnlcol  = evt->getCollection(  _initialColourNeutralLink );
     }
-    catch( lcio::DataNotAvailableException e )
+    catch( const lcio::DataNotAvailableException& e )
     {
         streamlog_out(WARNING) <<  _initialColourNeutralLink  << " collection not available" << std::endl;
         fcnlcol  = NULL;
@@ -528,7 +528,7 @@ void TrueJet_Parser::getall( LCEvent * event ) {
     try{
       fplcol  = evt->getCollection(  _finalElementonLink );
     }
-    catch( lcio::DataNotAvailableException e )
+    catch( const lcio::DataNotAvailableException& e )
     {
         streamlog_out(WARNING) <<  _finalElementonLink   << " collection not available" << std::endl;
         fcnlcol  = NULL;
@@ -540,7 +540,7 @@ void TrueJet_Parser::getall( LCEvent * event ) {
     try{
       iplcol  = evt->getCollection(  _initialElementonLink );
     }
-    catch( lcio::DataNotAvailableException e )
+    catch( const lcio::DataNotAvailableException& e )
     {
         streamlog_out(WARNING) <<  _initialElementonLink   << " collection not available" << std::endl;
         fcnlcol  = NULL;
@@ -552,7 +552,7 @@ void TrueJet_Parser::getall( LCEvent * event ) {
     try{
       tjrecolcol  = evt->getCollection(  _trueJetPFOLink );
     }
-    catch( lcio::DataNotAvailableException e )
+    catch( const lcio::DataNotAvailableException& e )
     {
         streamlog_out(WARNING) <<  _trueJetPFOLink   << " collection not available" << std::endl;
         fcnlcol  = NULL;
@@ -565,7 +565,7 @@ void TrueJet_Parser::getall( LCEvent * event ) {
     try{
       tjmcplcol  = evt->getCollection(  _trueJetMCParticleLink );
     }
-    catch( lcio::DataNotAvailableException e )
+    catch( const lcio::DataNotAvailableException& e )
     {
         streamlog_out(WARNING) <<  _trueJetMCParticleLink   << " collection not available" << std::endl;
         fcnlcol  = NULL;

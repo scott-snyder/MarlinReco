@@ -362,17 +362,17 @@ class Eigenvalue
 
    float cdivr{}, cdivi{};
    void cdiv(float xr, float xi, float yr, float yi) {
-      float r,d;
+      float r,d_;
       if (abs(yr) > abs(yi)) {
          r = yi/yr;
-         d = yr + r*yi;
-         cdivr = (xr + r*xi)/d;
-         cdivi = (xi - r*xr)/d;
+         d_ = yr + r*yi;
+         cdivr = (xr + r*xi)/d_;
+         cdivi = (xi - r*xr)/d_;
       } else {
          r = yr/yi;
-         d = yi + r*yr;
-         cdivr = (r*xr + xi)/d;
-         cdivi = (r*xi - xr)/d;
+         d_ = yi + r*yr;
+         cdivr = (r*xr + xi)/d_;
+         cdivi = (r*xi - xr)/d_;
       }
    }
 
@@ -389,7 +389,7 @@ class Eigenvalue
       // Initialize
    
       int nn = 3;
-      int n = nn-1;
+      int n_ = nn-1;
       int low = 0;
       int high = nn-1;
       float eps = pow(2.0,-52.0);
@@ -412,11 +412,11 @@ class Eigenvalue
       // Outer loop over eigenvalue index
    
       int iter = 0;
-      while (n >= low) {
+      while (n_ >= low) {
    
          // Look for single small sub-diagonal element
    
-         int l = n;
+         int l = n_;
          while (l > low) {
             s = abs(H[l-1][l-1]) + abs(H[l][l]);
             if (s == 0.0) {
@@ -431,23 +431,23 @@ class Eigenvalue
          // Check for convergence
          // One root found
    
-         if (l == n) {
-            H[n][n] = H[n][n] + exshift;
-            d[n] = H[n][n];
-            e[n] = 0.0;
-            n--;
+         if (l == n_) {
+            H[n_][n_] = H[n_][n_] + exshift;
+            d[n_] = H[n_][n_];
+            e[n_] = 0.0;
+            n_--;
             iter = 0;
    
          // Two roots found
    
-         } else if (l == n-1) {
-            w = H[n][n-1] * H[n-1][n];
-            p = (H[n-1][n-1] - H[n][n]) / 2.0;
+         } else if (l == n_-1) {
+            w = H[n_][n_-1] * H[n_-1][n_];
+            p = (H[n_-1][n_-1] - H[n_][n_]) / 2.0;
             q = p * p + w;
             z = sqrt(abs(q));
-            H[n][n] = H[n][n] + exshift;
-            H[n-1][n-1] = H[n-1][n-1] + exshift;
-            x = H[n][n];
+            H[n_][n_] = H[n_][n_] + exshift;
+            H[n_-1][n_-1] = H[n_-1][n_-1] + exshift;
+            x = H[n_][n_];
    
             // float pair
    
@@ -457,14 +457,14 @@ class Eigenvalue
                } else {
                   z = p - z;
                }
-               d[n-1] = x + z;
-               d[n] = d[n-1];
+               d[n_-1] = x + z;
+               d[n_] = d[n_-1];
                if (z != 0.0) {
-                  d[n] = x - w / z;
+                  d[n_] = x - w / z;
                }
-               e[n-1] = 0.0;
-               e[n] = 0.0;
-               x = H[n][n-1];
+               e[n_-1] = 0.0;
+               e[n_] = 0.0;
+               x = H[n_][n_-1];
                s = abs(x) + abs(z);
                p = x / s;
                q = z / s;
@@ -474,37 +474,37 @@ class Eigenvalue
    
                // Row modification
    
-               for (int j = n-1; j < nn; j++) {
-                  z = H[n-1][j];
-                  H[n-1][j] = q * z + p * H[n][j];
-                  H[n][j] = q * H[n][j] - p * z;
+               for (int j = n_-1; j < nn; j++) {
+                  z = H[n_-1][j];
+                  H[n_-1][j] = q * z + p * H[n_][j];
+                  H[n_][j] = q * H[n_][j] - p * z;
                }
    
                // Column modification
    
-               for (int i = 0; i <= n; i++) {
-                  z = H[i][n-1];
-                  H[i][n-1] = q * z + p * H[i][n];
-                  H[i][n] = q * H[i][n] - p * z;
+               for (int i = 0; i <= n_; i++) {
+                  z = H[i][n_-1];
+                  H[i][n_-1] = q * z + p * H[i][n_];
+                  H[i][n_] = q * H[i][n_] - p * z;
                }
    
                // Accumulate transformations
    
                for (int i = low; i <= high; i++) {
-                  z = V[i][n-1];
-                  V[i][n-1] = q * z + p * V[i][n];
-                  V[i][n] = q * V[i][n] - p * z;
+                  z = V[i][n_-1];
+                  V[i][n_-1] = q * z + p * V[i][n_];
+                  V[i][n_] = q * V[i][n_] - p * z;
                }
    
             // Complex pair
    
             } else {
-               d[n-1] = x + p;
-               d[n] = x + p;
-               e[n-1] = z;
-               e[n] = -z;
+               d[n_-1] = x + p;
+               d[n_] = x + p;
+               e[n_-1] = z;
+               e[n_] = -z;
             }
-            n = n - 2;
+            n_ = n_ - 2;
             iter = 0;
    
          // No convergence yet
@@ -513,22 +513,22 @@ class Eigenvalue
    
             // Form shift
    
-            x = H[n][n];
+            x = H[n_][n_];
             y = 0.0;
             w = 0.0;
-            if (l < n) {
-               y = H[n-1][n-1];
-               w = H[n][n-1] * H[n-1][n];
+            if (l < n_) {
+               y = H[n_-1][n_-1];
+               w = H[n_][n_-1] * H[n_-1][n_];
             }
    
             // Wilkinson's original ad hoc shift
    
             if (iter == 10) {
                exshift += x;
-               for (int i = low; i <= n; i++) {
+               for (int i = low; i <= n_; i++) {
                   H[i][i] -= x;
                }
-               s = abs(H[n][n-1]) + abs(H[n-1][n-2]);
+               s = abs(H[n_][n_-1]) + abs(H[n_-1][n_-2]);
                x = y = 0.75 * s;
                w = -0.4375 * s * s;
             }
@@ -544,7 +544,7 @@ class Eigenvalue
                        s = -s;
                     }
                     s = x - w / ((y - x) / 2.0 + s);
-                    for (int i = low; i <= n; i++) {
+                    for (int i = low; i <= n_; i++) {
                        H[i][i] -= s;
                     }
                     exshift += s;
@@ -558,7 +558,7 @@ class Eigenvalue
 // for abs() below
             // Look for two consecutive small sub-diagonal elements
    
-            int m = n-2;
+            int m = n_-2;
             while (m >= l) {
                z = H[m][m];
                r = x - z;
@@ -583,7 +583,7 @@ class Eigenvalue
                m--;
             }
    
-            for (int i = m+2; i <= n; i++) {
+            for (int i = m+2; i <= n_; i++) {
                H[i][i-2] = 0.0;
                if (i > m+2) {
                   H[i][i-3] = 0.0;
@@ -592,8 +592,8 @@ class Eigenvalue
    
             // Float QR step involving rows l:n and columns m:n
    
-            for (int k = m; k <= n-1; k++) {
-               int notlast = (k != n-1);
+            for (int k = m; k <= n_-1; k++) {
+               int notlast = (k != n_-1);
                if (k != m) {
                   p = H[k][k-1];
                   q = H[k+1][k-1];
@@ -639,7 +639,7 @@ class Eigenvalue
    
                   // Column modification
    
-                  for (int i = 0; i <= min(n,k+3); i++) {
+                  for (int i = 0; i <= min(n_,k+3); i++) {
                      p = x * H[i][k] + y * H[i][k+1];
                      if (notlast) {
                         p = p + z * H[i][k+2];
@@ -663,7 +663,7 @@ class Eigenvalue
                }  // (s != 0)
             }  // k loop
          }  // check convergence
-      }  // while (n >= low)
+      }  // while (n_ >= low)
       
       // Backsubstitute to find vectors of upper triangular form
 
@@ -671,20 +671,20 @@ class Eigenvalue
          return;
       }
    
-      for (n = nn-1; n >= 0; n--) {
-         p = d[n];
-         q = e[n];
+      for (n_ = nn-1; n_ >= 0; n_--) {
+         p = d[n_];
+         q = e[n_];
    
          // float vector
    
          if (q == 0) {
-            int l = n;
-            H[n][n] = 1.0;
-            for (int i = n-1; i >= 0; i--) {
+            int l = n_;
+            H[n_][n_] = 1.0;
+            for (int i = n_-1; i >= 0; i--) {
                w = H[i][i] - p;
                r = 0.0;
-               for (int j = l; j <= n; j++) {
-                  r = r + H[i][j] * H[j][n];
+               for (int j = l; j <= n_; j++) {
+                  r = r + H[i][j] * H[j][n_];
                }
                if (e[i] < 0.0) {
                   z = w;
@@ -693,9 +693,9 @@ class Eigenvalue
                   l = i;
                   if (e[i] == 0.0) {
                      if (w != 0.0) {
-                        H[i][n] = -r / w;
+                        H[i][n_] = -r / w;
                      } else {
-                        H[i][n] = -r / (eps * norm);
+                        H[i][n_] = -r / (eps * norm);
                      }
    
                   // Solve real equations
@@ -705,20 +705,20 @@ class Eigenvalue
                      y = H[i+1][i];
                      q = (d[i] - p) * (d[i] - p) + e[i] * e[i];
                      t = (x * s - z * r) / q;
-                     H[i][n] = t;
+                     H[i][n_] = t;
                      if (abs(x) > abs(z)) {
-                        H[i+1][n] = (-r - w * t) / x;
+                        H[i+1][n_] = (-r - w * t) / x;
                      } else {
-                        H[i+1][n] = (-s - y * t) / z;
+                        H[i+1][n_] = (-s - y * t) / z;
                      }
                   }
    
                   // Overflow control
    
-                  t = abs(H[i][n]);
+                  t = abs(H[i][n_]);
                   if ((eps * t) * t > 1) {
-                     for (int j = i; j <= n; j++) {
-                        H[j][n] = H[j][n] / t;
+                     for (int j = i; j <= n_; j++) {
+                        H[j][n_] = H[j][n_] / t;
                      }
                   }
                }
@@ -727,27 +727,27 @@ class Eigenvalue
          // Complex vector
    
          } else if (q < 0) {
-            int l = n-1;
+            int l = n_-1;
 
             // Last vector component imaginary so matrix is triangular
    
-            if (abs(H[n][n-1]) > abs(H[n-1][n])) {
-               H[n-1][n-1] = q / H[n][n-1];
-               H[n-1][n] = -(H[n][n] - p) / H[n][n-1];
+            if (abs(H[n_][n_-1]) > abs(H[n_-1][n_])) {
+               H[n_-1][n_-1] = q / H[n_][n_-1];
+               H[n_-1][n_] = -(H[n_][n_] - p) / H[n_][n_-1];
             } else {
-               cdiv(0.0,-H[n-1][n],H[n-1][n-1]-p,q);
-               H[n-1][n-1] = cdivr;
-               H[n-1][n] = cdivi;
+               cdiv(0.0,-H[n_-1][n_],H[n_-1][n_-1]-p,q);
+               H[n_-1][n_-1] = cdivr;
+               H[n_-1][n_] = cdivi;
             }
-            H[n][n-1] = 0.0;
-            H[n][n] = 1.0;
-            for (int i = n-2; i >= 0; i--) {
+            H[n_][n_-1] = 0.0;
+            H[n_][n_] = 1.0;
+            for (int i = n_-2; i >= 0; i--) {
                float ra,sa,vr,vi;
                ra = 0.0;
                sa = 0.0;
-               for (int j = l; j <= n; j++) {
-                  ra = ra + H[i][j] * H[j][n-1];
-                  sa = sa + H[i][j] * H[j][n];
+               for (int j = l; j <= n_; j++) {
+                  ra = ra + H[i][j] * H[j][n_-1];
+                  sa = sa + H[i][j] * H[j][n_];
                }
                w = H[i][i] - p;
    
@@ -759,8 +759,8 @@ class Eigenvalue
                   l = i;
                   if (e[i] == 0) {
                      cdiv(-ra,-sa,w,q);
-                     H[i][n-1] = cdivr;
-                     H[i][n] = cdivi;
+                     H[i][n_-1] = cdivr;
+                     H[i][n_] = cdivi;
                   } else {
    
                      // Solve complex equations
@@ -774,25 +774,25 @@ class Eigenvalue
                         abs(x) + abs(y) + abs(z));
                      }
                      cdiv(x*r-z*ra+q*sa,x*s-z*sa-q*ra,vr,vi);
-                     H[i][n-1] = cdivr;
-                     H[i][n] = cdivi;
+                     H[i][n_-1] = cdivr;
+                     H[i][n_] = cdivi;
                      if (abs(x) > (abs(z) + abs(q))) {
-                        H[i+1][n-1] = (-ra - w * H[i][n-1] + q * H[i][n]) / x;
-                        H[i+1][n] = (-sa - w * H[i][n] - q * H[i][n-1]) / x;
+                        H[i+1][n_-1] = (-ra - w * H[i][n_-1] + q * H[i][n_]) / x;
+                        H[i+1][n_] = (-sa - w * H[i][n_] - q * H[i][n_-1]) / x;
                      } else {
-                        cdiv(-r-y*H[i][n-1],-s-y*H[i][n],z,q);
-                        H[i+1][n-1] = cdivr;
-                        H[i+1][n] = cdivi;
+                        cdiv(-r-y*H[i][n_-1],-s-y*H[i][n_],z,q);
+                        H[i+1][n_-1] = cdivr;
+                        H[i+1][n_] = cdivi;
                      }
                   }
    
                   // Overflow control
 
-                  t = max(abs(H[i][n-1]),abs(H[i][n]));
+                  t = max(abs(H[i][n_-1]),abs(H[i][n_]));
                   if ((eps * t) * t > 1) {
-                     for (int j = i; j <= n; j++) {
-                        H[j][n-1] = H[j][n-1] / t;
-                        H[j][n] = H[j][n] / t;
+                     for (int j = i; j <= n_; j++) {
+                        H[j][n_-1] = H[j][n_-1] / t;
+                        H[j][n_] = H[j][n_] / t;
                      }
                   }
                }

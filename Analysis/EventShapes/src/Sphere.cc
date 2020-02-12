@@ -95,7 +95,7 @@ void Sphere::processEvent( LCEvent * evt ) {
   LCCollection* col ; 
   
   try{ col = evt -> getCollection( _colName ) ; }
-  catch(EVENT::DataNotAvailableException){
+  catch(const EVENT::DataNotAvailableException&){
     streamlog_out(DEBUG)  << "Cannot find PFO Collection in event/run  " << evt->getEventNumber() <<" / "<< evt->getRunNumber() <<std::endl;
    streamlog_out(DEBUG) << "Skipping this event!" << std::endl;
    throw marlin::SkipEventException(this);
