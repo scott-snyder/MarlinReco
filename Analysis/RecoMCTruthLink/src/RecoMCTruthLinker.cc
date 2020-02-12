@@ -439,7 +439,7 @@ void RecoMCTruthLinker::processEvent( LCEvent * evt ) {
 
   
 }
-void RecoMCTruthLinker::trackLinker(   LCEvent * evt, LCCollection* mcpCol ,  LCCollection* trackCol,  
+void RecoMCTruthLinker::trackLinker(   LCEvent * evt, LCCollection* /*mcpCol*/ ,  LCCollection* trackCol,  
                                        LCCollection** ttrlcol,  LCCollection** trtlcol) { 
 
 
@@ -472,8 +472,6 @@ void RecoMCTruthLinker::trackLinker(   LCEvent * evt, LCCollection* mcpCol ,  LC
 
   // loop over reconstructed tracks
   int nTrack = trackCol->getNumberOfElements() ;
-  
-  int ifoundch =0;
   
   streamlog_out( DEBUG6 ) << " *** Sorting out Track<->MCParticle using simHit<->MCParticle." << std::endl;
 
@@ -621,8 +619,6 @@ void RecoMCTruthLinker::trackLinker(   LCEvent * evt, LCCollection* mcpCol ,  LC
       
     
     }
-    
-    ifoundch=ifound;
   } 
   //  seen-true relation complete. add the collection
 
@@ -944,7 +940,6 @@ void RecoMCTruthLinker::clusterLinker(  LCEvent * evt,  LCCollection* mcpCol ,  
                     
 
                     int starts_in_tracker = 0 ;
-                    unsigned lll=0 ;
                     int has_pi0 = 0 ;
                     int oma_in_calo = 0;
                     double rdist =0.;
@@ -960,11 +955,9 @@ void RecoMCTruthLinker::clusterLinker(  LCEvent * evt,  LCCollection* mcpCol ,  
                                                                                                     // take place (think delta-rays !)
  		      if ( sister->isBackscatter()) {
                         has_bs = 1 ; 
-                        lll=kkk;
                         break ;
 		      } else if ( sister->isDecayedInTracker() ) {
                         starts_in_tracker = 1 ;
-                        lll=kkk;
                         break ;
                       }
                       // any pi0:s at all ? (it doesn't matter that we break at the two cases above, 
@@ -1108,7 +1101,6 @@ void RecoMCTruthLinker::clusterLinker(  LCEvent * evt,  LCCollection* mcpCol ,  
   
   std::vector<Cluster*> missingMC ;
   missingMC.reserve( nCluster ) ;
-  int ifoundclu =0;
   // now for the clusters
   
   
@@ -1486,7 +1478,6 @@ void RecoMCTruthLinker::clusterLinker(  LCEvent * evt,  LCCollection* mcpCol ,  
       truthClusterRelNav.addRelation(   theMCPs[iii] , clu , weight ) ;
       
     }
-    ifoundclu=ifound;
   } // cluster loop
   
   streamlog_out( DEBUG6 ) << " *** Sorting out Cluster<->MCParticle : DONE" << std::endl;
@@ -2064,7 +2055,7 @@ void RecoMCTruthLinker::check( LCEvent * evt ) {
   try{  
     mcpskCol = evt->getCollection( _mcParticlesSkimmedName ); 
   }
-  catch (DataNotAvailableException e){
+  catch (const DataNotAvailableException& e){
     streamlog_out(DEBUG9) << "RecoMCTructh::Check(): MCParticleSkimmed collection \"" << _mcParticlesSkimmedName << "\" does not exist, skipping" << std::endl;
   }
   
@@ -2183,24 +2174,24 @@ void RecoMCTruthLinker::mergeTrackerHitRelations(LCEvent * evt){
  
       StringVec stringKeys ;
       col->getParameters().getStringKeys( stringKeys ) ;
-      for(unsigned i=0; i< stringKeys.size() ; i++ ){
+      for(unsigned j=0; j< stringKeys.size() ; j++ ){
         StringVec vals ;
-        col->getParameters().getStringVals(  stringKeys[i] , vals ) ;
-        _mergedTrackerHitRelCol->parameters().setValues(  stringKeys[i] , vals ) ;   
+        col->getParameters().getStringVals(  stringKeys[j] , vals ) ;
+        _mergedTrackerHitRelCol->parameters().setValues(  stringKeys[j] , vals ) ;   
       }
       StringVec intKeys ;
       col->getParameters().getIntKeys( intKeys ) ;
-      for(unsigned i=0; i< intKeys.size() ; i++ ){
+      for(unsigned j=0; j< intKeys.size() ; j++ ){
         IntVec vals ;
-        col->getParameters().getIntVals(  intKeys[i] , vals ) ;
-        _mergedTrackerHitRelCol->parameters().setValues(  intKeys[i] , vals ) ;   
+        col->getParameters().getIntVals(  intKeys[j] , vals ) ;
+        _mergedTrackerHitRelCol->parameters().setValues(  intKeys[j] , vals ) ;   
       }
       StringVec floatKeys ;
       col->getParameters().getFloatKeys( floatKeys ) ;
-      for(unsigned i=0; i< floatKeys.size() ; i++ ){
+      for(unsigned j=0; j< floatKeys.size() ; j++ ){
         FloatVec vals ;
-        col->getParameters().getFloatVals(  floatKeys[i] , vals ) ;
-        _mergedTrackerHitRelCol->parameters().setValues(  floatKeys[i] , vals ) ;   
+        col->getParameters().getFloatVals(  floatKeys[j] , vals ) ;
+        _mergedTrackerHitRelCol->parameters().setValues(  floatKeys[j] , vals ) ;   
       }
 
       
@@ -2269,24 +2260,24 @@ void RecoMCTruthLinker::mergeCaloHitRelations(LCEvent * evt){
  
       StringVec stringKeys ;
       col->getParameters().getStringKeys( stringKeys ) ;
-      for(unsigned i=0; i< stringKeys.size() ; i++ ){
+      for(unsigned j=0; j< stringKeys.size() ; j++ ){
         StringVec vals ;
-        col->getParameters().getStringVals(  stringKeys[i] , vals ) ;
-        _mergedCaloHitRelCol->parameters().setValues(  stringKeys[i] , vals ) ;   
+        col->getParameters().getStringVals(  stringKeys[j] , vals ) ;
+        _mergedCaloHitRelCol->parameters().setValues(  stringKeys[j] , vals ) ;   
       }
       StringVec intKeys ;
       col->getParameters().getIntKeys( intKeys ) ;
-      for(unsigned i=0; i< intKeys.size() ; i++ ){
+      for(unsigned j=0; j< intKeys.size() ; j++ ){
         IntVec vals ;
-        col->getParameters().getIntVals(  intKeys[i] , vals ) ;
-        _mergedCaloHitRelCol->parameters().setValues(  intKeys[i] , vals ) ;   
+        col->getParameters().getIntVals(  intKeys[j] , vals ) ;
+        _mergedCaloHitRelCol->parameters().setValues(  intKeys[j] , vals ) ;   
       }
       StringVec floatKeys ;
       col->getParameters().getFloatKeys( floatKeys ) ;
-      for(unsigned i=0; i< floatKeys.size() ; i++ ){
+      for(unsigned j=0; j< floatKeys.size() ; j++ ){
         FloatVec vals ;
-        col->getParameters().getFloatVals(  floatKeys[i] , vals ) ;
-        _mergedCaloHitRelCol->parameters().setValues(  floatKeys[i] , vals ) ;   
+        col->getParameters().getFloatVals(  floatKeys[j] , vals ) ;
+        _mergedCaloHitRelCol->parameters().setValues(  floatKeys[j] , vals ) ;   
       }
 
       

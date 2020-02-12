@@ -122,7 +122,7 @@ void TOFEstimators::processEvent( LCEvent * evt ) {
   try{
     colPFO = evt->getCollection( _colNamePFO ) ;
   }
-  catch(lcio::Exception){
+  catch(const lcio::Exception&){
     streamlog_out( DEBUG6 ) << " collection " << _colNamePFO
 			    << " not found in event - nothing to do ... " << std::endl ;
   }
@@ -403,7 +403,7 @@ void TOFEstimators::check( LCEvent *evt) {
 
   // get the PFO collection from the event if it exists
   LCCollection* colPFO = nullptr ;
-  try{ colPFO = evt->getCollection( _colNamePFO ) ; } catch(lcio::Exception){}
+  try{ colPFO = evt->getCollection( _colNamePFO ) ; } catch(const lcio::Exception&){}
 
   if( colPFO != nullptr ){
   
