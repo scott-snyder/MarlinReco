@@ -59,7 +59,7 @@ namespace TTbarAnalysis
 		//
 		//	Private methods
 		//
-			static double * castIntToDouble(int * array);
+          //static double * castIntToDouble(int * array);
 	};
 }
 #endif
