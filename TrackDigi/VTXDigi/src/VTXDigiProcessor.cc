@@ -196,12 +196,15 @@ void VTXDigiProcessor::processEvent( LCEvent * evt ) {
     }
     catch(DataNotAvailableException &e){
 
-      if (iColl==0)
+      if (iColl==0) {
         streamlog_out(DEBUG) << "Collection " << _colNameVTX.c_str() << " is unavailable in event " << _nEvt << std::endl;
-      else if (iColl==1)
+      }
+      else if (iColl==1) {
         streamlog_out(DEBUG) << "Collection " << _colNameSIT.c_str() << " is unavailable in event " << _nEvt << std::endl;
-      else 
-        streamlog_out(DEBUG) << "Collection " << _colNameSET.c_str() << " is unavailable in event " << _nEvt << std::endl; 
+      }
+      else  {
+        streamlog_out(DEBUG) << "Collection " << _colNameSET.c_str() << " is unavailable in event " << _nEvt << std::endl;
+      }
     }
 
     if( STHcol != 0 ){    
@@ -227,9 +230,9 @@ void VTXDigiProcessor::processEvent( LCEvent * evt ) {
         
         if (_removeDRays) { // check if hit originates from delta-electron 
           float totMomentum = 0;
-          for (int i=0;i<3;++i) 
+          for (int ii=0;ii<3;++ii) 
             {
-              totMomentum+=SimTHit->getMomentum()[i]*SimTHit->getMomentum()[i];
+              totMomentum+=SimTHit->getMomentum()[ii]*SimTHit->getMomentum()[ii];
             }
           totMomentum = sqrt(totMomentum);
           
@@ -285,7 +288,7 @@ void VTXDigiProcessor::processEvent( LCEvent * evt ) {
 
             streamlog_out(DEBUG) << "start smearing along ladders for: " << layer << std::endl;
             
-            int layer = SimTHit->getCellID0() - 1;
+            int layer_ = SimTHit->getCellID0() - 1;
               
             //phi between each ladder
             double deltaPhi = ( 2 * M_PI ) / layerVXD.getNLadders(layer) ;
@@ -295,24 +298,24 @@ void VTXDigiProcessor::processEvent( LCEvent * evt ) {
             int ladderIndex = -1;
             double ladderPhi=999;
               
-            for (int ic=0; ic < layerVXD.getNLadders(layer); ++ic) {
+            for (int ic=0; ic < layerVXD.getNLadders(layer_); ++ic) {
                 
-              ladderPhi = correctPhiRange( layerVXD.getPhi0( layer ) + ic*deltaPhi ) ;
+              ladderPhi = correctPhiRange( layerVXD.getPhi0( layer_ ) + ic*deltaPhi ) ;
                 
               PhiInLocal = hitvec.phi() - ladderPhi;
               double RXY = hitvec.rho();
                 
               // check if point is in range of ladder
-              if (RXY*cos(PhiInLocal) - layerVXD.getSensitiveDistance(layer) > -layerVXD.getSensitiveThickness(layer) && 
-                  RXY*cos(PhiInLocal) - layerVXD.getSensitiveDistance(layer) <  layerVXD.getSensitiveThickness(layer) )
+              if (RXY*cos(PhiInLocal) - layerVXD.getSensitiveDistance(layer_) > -layerVXD.getSensitiveThickness(layer_) && 
+                  RXY*cos(PhiInLocal) - layerVXD.getSensitiveDistance(layer_) <  layerVXD.getSensitiveThickness(layer_) )
                 {
                   ladderIndex = ic;
                   break;
                 }
             }
 
-            double sensitive_width  = layerVXD.getSensitiveWidth(layer);
-            double sensitive_offset = layerVXD.getSensitiveOffset(layer);
+            double sensitive_width  = layerVXD.getSensitiveWidth(layer_);
+            double sensitive_offset = layerVXD.getSensitiveOffset(layer_);
 
             double ladder_incline = correctPhiRange( (M_PI/2.0 ) + ladderPhi );
               
@@ -322,12 +325,12 @@ void VTXDigiProcessor::processEvent( LCEvent * evt ) {
                                  << " Event: " << _nEvt 
                                  << " hit: " << i 
                                  << " of "   << nSimHits
-                                 << "  layer: " << layer 
+                                 << "  layer: " << layer_ 
                                  << "  ladderIndex: " << ladderIndex 
                                  << "  half ladder width " << sensitive_width * 0.5 
                                  << "  u: " <<  u
                                  << "  layer sensitive_offset " << sensitive_offset
-                                 << "  layer phi0 " << layerVXD.getPhi0( layer )
+                                 << "  layer phi0 " << layerVXD.getPhi0( layer_ )
                                  << "  phi: " <<  hitvec.phi()
                                  << "  PhiInLocal: " << PhiInLocal
                                  << "  ladderPhi: " << ladderPhi
@@ -346,7 +349,7 @@ void VTXDigiProcessor::processEvent( LCEvent * evt ) {
             while( tries < 100 )
               {
                   
-                if(tries > 0) streamlog_out(DEBUG) << "retry smearing for " << layer << " " << ladderIndex << " : retries " << tries << std::endl;
+                if(tries > 0) streamlog_out(DEBUG) << "retry smearing for " << layer_ << " " << ladderIndex << " : retries " << tries << std::endl;
                   
                 _pointResoRPhi = _pointResoRPhi_VTX;
                 _pointResoZ    = _pointResoZ_VTX;
