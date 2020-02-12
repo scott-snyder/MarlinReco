@@ -129,13 +129,13 @@ void PrepareRECParticles::processEvent( LCEvent * evt )
   LCCollection *colMC, *colTrack;
   try {
     colMC = evt->getCollection( _colNameMC ) ;
-  } catch (Exception e) {
+  } catch (const Exception& e) {
     colMC = 0;
   }
   
   try {
     colTrack = evt->getCollection( _colNameTrack ) ;
-  } catch (Exception e) {
+  } catch (const Exception& e) {
     colTrack = 0;
   }
   

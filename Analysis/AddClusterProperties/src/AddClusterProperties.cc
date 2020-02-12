@@ -117,7 +117,7 @@ void AddClusterProperties::processEvent( LCEvent * evt ) {
 	  if ( subDetectorNames[kkk] == "bcal"  )   { bcal_index  = kkk ;  }
         }
     }
-    catch( lcio::DataNotAvailableException e )
+    catch( const lcio::DataNotAvailableException& e )
     {
         streamlog_out(WARNING) <<  _clusterCollectionName   << " collection not available" << std::endl;
         clucol = NULL;
@@ -212,8 +212,7 @@ void AddClusterProperties::processEvent( LCEvent * evt ) {
         shape[sum_wgt4_index]=sum_wgt4; 
  
 
-        float Eerror=clu->getEnergyError();
-        if ( Eerror == 0.0 ) {
+        if ( clu->getEnergyError() == 0.0 ) {
             // not set, so as per HLRWS:
           float E=clu->getEnergy();
           const FloatVec pec  = clu->getSubdetectorEnergies();
@@ -262,7 +261,7 @@ void AddClusterProperties::processEvent( LCEvent * evt ) {
     try{
       pfocol = evt->getCollection( _PFOName );
     }
-    catch( lcio::DataNotAvailableException e )
+    catch( const lcio::DataNotAvailableException& e )
     {
         streamlog_out(WARNING) << _PFOName    << " collection not available" << std::endl;
         pfocol = NULL;
