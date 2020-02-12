@@ -268,7 +268,7 @@ int ThrustReconstruction::JetsetThrust(){
   const float dConv=0.0001; // 0.0001
   int sgn;
   double theta=0,phi=0;
-  double thp,thps,tds,tmax,dOblateness;
+  double thp,thps,tds,tmax;
   vector<Hep3Vector> TAxes(3),Fast(iFastMax+1),Workv(nwork);
   vector<double> Workf(nwork),dThrust(3);
   Hep3Vector tdi,tpr,mytest;
@@ -408,7 +408,6 @@ int ThrustReconstruction::JetsetThrust(){
       TAxes[i].rotateY(theta); 
       TAxes[i].rotateZ(phi); 
     }
-  dOblateness = dThrust[1] - dThrust[2];
 
   _principleThrustValue = dThrust[0];
   _majorThrustValue     = dThrust[1];

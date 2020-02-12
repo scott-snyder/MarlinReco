@@ -444,7 +444,7 @@ SimDigital::cellIDHitMap SimDigital::createPotentialOutputHits(LCCollection* col
 			chargeSpreader->addCharge( itstep.charge , static_cast<float>(itstep.step.x()) , static_cast<float>(itstep.step.y()) , aGeomCellId ) ;
 
 
-		for ( const std::pair<ChargeSpreader::I_J_Coordinates,float>& it : chargeSpreader->getChargeMap() )
+		for ( const std::pair<const ChargeSpreader::I_J_Coordinates,float>& it : chargeSpreader->getChargeMap() )
 		{
 			if (it.second >= 0)
 			{
