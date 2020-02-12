@@ -148,7 +148,7 @@ void TrueJet::processEvent( LCEvent * event ) {
     try{
         mcpcol = evt->getCollection( _MCParticleColllectionName );
     }
-    catch( lcio::DataNotAvailableException e )
+    catch( const lcio::DataNotAvailableException& e )
     {
         streamlog_out(WARNING) <<  _MCParticleColllectionName  << " collection not available" << std::endl;
         mcpcol = NULL;
@@ -157,7 +157,7 @@ void TrueJet::processEvent( LCEvent * event ) {
     try{
         rmclcol = evt->getCollection( _recoMCTruthLink );
     }
-    catch( lcio::DataNotAvailableException e )
+    catch( const lcio::DataNotAvailableException& e )
     {
         streamlog_out(WARNING) << _recoMCTruthLink   << " collection not available" << std::endl;
         rmclcol = NULL;
