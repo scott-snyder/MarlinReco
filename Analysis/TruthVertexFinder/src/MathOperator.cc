@@ -215,6 +215,7 @@ namespace TTbarAnalysis
 	}
 
 
+#if 0
 	double * MathOperator::castIntToDouble(int * array)
 	{
 		int size = (sizeof(array)/sizeof(*array));
@@ -229,6 +230,7 @@ namespace TTbarAnalysis
 		}
 		return arrPoint1;
 	}
+#endif
 	vector< vector< int > * > * MathOperator::GetMagicNumbers()
 	{
 		vector< vector< int > * > * result = new vector< vector< int > * >();

@@ -106,7 +106,10 @@ void SimpleFCalDigi::init() {
 
   //fg: need to set default encoding in for reading old files...
   //CellIDDecoder<SimCalorimeterHit>::setDefaultEncoding("M:3,S-1:3,I:9,J:9,K-1:6") ;
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
   CellIDDecoder<SimCalorimeterHit>::setDefaultEncoding(_defaultEncoding.c_str()) ;
+#pragma GCC diagnostic pop
   if ( ! _caloID.compare("lcal")  && // true if it is false ... 
                  _fixLCalHits          ) {  
             // parametrs for fixing wrong cellID to xyz coding in LCal Mokka
@@ -171,15 +174,15 @@ void SimpleFCalDigi::processEvent( LCEvent * evt ) {
                  _fixLCalHits          ) {  
             // fix for wrong cellID to xyz coding in LCal Mokka
 
-            int i = idDecoder(hit)[ "I" ] ;
-            int j = idDecoder(hit)[ "J" ] ;
+            int i_ = idDecoder(hit)[ "I" ] ;
+            int j_ = idDecoder(hit)[ "J" ] ;
             int k = idDecoder(hit)[ "K" ] ;
             int s = idDecoder(hit)[ "S-1" ] ;
 
 	    float z_from_cell = ( zMin + (k-1) * dZ + (dZ- WThickness)/2.0 ) - 0.11 ; // 0.11 is a guess on the sensorthikness
-            float r_from_cell =  i*cellDimR + cellDimR/2.0 + rMin; 
+            float r_from_cell =  i_*cellDimR + cellDimR/2.0 + rMin; 
             int   oddeven = ((k+1)%2) ;
-            float phi_from_cell = j*cellDimPhi + cellDimPhi/2.0 - oddeven*cellDimPhi/2.0;
+            float phi_from_cell = j_*cellDimPhi + cellDimPhi/2.0 - oddeven*cellDimPhi/2.0;
 
             float angle= -(xing_angle*1.0e-3 / 2.0)* (2 * ( s - 0.5 ) ) - ( s - 1 )*3.14159  ; 
             float rotated_z_from_cell=    z_from_cell*cos( angle) + r_from_cell*cos(phi_from_cell)*sin( angle);
@@ -189,7 +192,7 @@ void SimpleFCalDigi::processEvent( LCEvent * evt ) {
             pos[1] =  r_from_cell*sin(phi_from_cell) ; 
             pos[2]=rotated_z_from_cell;
 
-	    streamlog_out( DEBUG3 ) << "i,j,k,s : " << i << " " << j << " " << k << " " << s << " " << oddeven << std::endl;
+	    streamlog_out( DEBUG3 ) << "i,j,k,s : " << i_ << " " << j_ << " " << k << " " << s << " " << oddeven << std::endl;
             streamlog_out( DEBUG3 ) << "xyzr  input                         : " << hit->getPosition()[0] << " " << hit->getPosition()[1]  << " " << hit->getPosition()[2] << " " << 
 	      sqrt(hit->getPosition()[0]*hit->getPosition()[0]+hit->getPosition()[1]*hit->getPosition()[1]) << std::endl;
 	    streamlog_out( DEBUG3 ) << "xyzr with r and z fr cellID rotated : " << pos[0] << " " << pos[1] << " " << pos[2] << " " << 

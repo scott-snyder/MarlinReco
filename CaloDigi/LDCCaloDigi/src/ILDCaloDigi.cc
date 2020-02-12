@@ -571,7 +571,10 @@ void ILDCaloDigi::init() {
   _countWarnings=0;
 
   //fg: need to set default encoding in for reading old files...
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
   CellIDDecoder<SimCalorimeterHit>::setDefaultEncoding("M:3,S-1:3,I:9,J:9,K-1:6") ;
+#pragma GCC diagnostic pop
 
   const gear::GearParameters& pMokka = Global::GEAR->getGearParameters("MokkaParameters");
 
@@ -640,7 +643,7 @@ void ILDCaloDigi::init() {
         }
 
         streamlog_out (MESSAGE) << "taking number of virtual cells from Mokka section of gear file: " << nVirtualMokkaS << " " << _strip_virt_cells << endl;
-      } catch(gear::UnknownParameterException &e) {                  // if still not found, use default from processor parameter
+      } catch(gear::UnknownParameterException &) {                  // if still not found, use default from processor parameter
         _strip_virt_cells = _ecalStrip_default_nVirt;
         streamlog_out (WARNING) << "taking number of virtual cells from steering file (not found in gear file): " << _strip_virt_cells << endl;
       }
@@ -654,13 +657,13 @@ void ILDCaloDigi::init() {
       try {
         _ecalLayout = pMokka.getStringVal("Ecal_Sc_Si_mix");
         streamlog_out (MESSAGE) << "taking layer layout from mokka section of gear file: " << _ecalLayout << endl;
-      } catch(gear::UnknownParameterException &e) {
+      } catch(gear::UnknownParameterException &) {
         _ecalLayout = _ecal_deafult_layer_config;
         streamlog_out (WARNING) << "taking layer layout from steering file (not found in gear file): " << _ecalLayout << endl;
       }
     }
 
-  } catch(gear::UnknownParameterException &e) {
+  } catch(gear::UnknownParameterException &) {
     streamlog_out (WARNING) << "WARNING, could not get ECAL gear parameters!" << endl;
   }
 
@@ -869,9 +872,9 @@ void ILDCaloDigi::processEvent( LCEvent * evt ) {
             float eCellInTime = 0.;
             float eCellOutput = 0.;
 
-            for(unsigned int i =0; i<n;i++){
-              float timei   = hit->getTimeCont(i);
-              float energyi = hit->getEnergyCont(i);
+            for(unsigned int ii =0; ii<n;ii++){
+              float timei   = hit->getTimeCont(ii);
+              float energyi = hit->getEnergyCont(ii);
       	      float energySum = 0;
 
               float deltat = 0;
@@ -881,27 +884,27 @@ void ILDCaloDigi::processEvent( LCEvent * evt ) {
                 eCellInTime+=ecor;
               }
 
-              if(!used[i]){
+              if(!used[ii]){
                 // merge with other hits?
-                used[i] = true;
-                for(unsigned int j =i+1; j<n;j++){
-                  if(!used[j]){
-                    float timej   = hit->getTimeCont(j);
-                    float energyj = hit->getEnergyCont(j);
-                    float deltat = fabs(timei-timej);
+                used[ii] = true;
+                for(unsigned int jj =ii+1; jj<n;jj++){
+                  if(!used[jj]){
+                    float timej   = hit->getTimeCont(jj);
+                    float energyj = hit->getEnergyCont(jj);
+                    float deltat_ = fabs(timei-timej);
 		    if (_ecalSimpleTimingCut){
-			    float deltat = _ecalCorrectTimesForPropagation?dt:0;
-			    if (timej-deltat>_ecalTimeWindowMin && timej-deltat<ecalTimeWindowMax){
+			    float deltat2 = _ecalCorrectTimesForPropagation?dt:0;
+			    if (timej-deltat2>_ecalTimeWindowMin && timej-deltat2<ecalTimeWindowMax){
 				    energySum += energyj;
 				    if (timej < timei){
 					    timei = timej;
 				    }
 			    }
 		    } else {
-			if(deltat<_ecalDeltaTimeHitResolution){
+			if(deltat_<_ecalDeltaTimeHitResolution){
 			if(energyj>energyi)timei=timej;
 			energyi+=energyj;
-			used[j] = true;
+			used[jj] = true;
 			}
 		    }
                   }
@@ -1103,13 +1106,11 @@ void ILDCaloDigi::processEvent( LCEvent * evt ) {
 
             int count = 0;
          
-            for(unsigned int i =0; i<n;i++){ // loop over all subhits
-              float timei   = hit->getTimeCont(i); //absolute hit timing of current subhit
-              float energyi = hit->getEnergyCont(i); //energy of current subhit
+            for(unsigned int ii =0; ii<n;ii++){ // loop over all subhits
+              float timei   = hit->getTimeCont(ii); //absolute hit timing of current subhit
+              float energyi = hit->getEnergyCont(ii); //energy of current subhit
 	      float energySum = 0;
-              float deltat = 0;
-              if(_hcalCorrectTimesForPropagation)deltat=dt;  //deltat now carries hit timing correction.
-	      //std::cout <<"outer:" << i << " " << n << std::endl;
+	      //std::cout <<"outer:" << ii << " " << n << std::endl;
 
               //idea of the following section: 
               //if simpletimingcut == false
@@ -1121,31 +1122,31 @@ void ILDCaloDigi::processEvent( LCEvent * evt ) {
               //sum up hit energies within timeWindowMin and timeWindowMax, use earliest subhit in this window as hit time for resulting calohit.
               //only one calorimeterhit will be generated from this.
               
-              if(!used[i]){ //if current subhit has not been merged with previous hits already, take current hit as starting point to merge hits
+              if(!used[ii]){ //if current subhit has not been merged with previous hits already, take current hit as starting point to merge hits
                 // merge with other hits?
-                used[i] = true;
-                for(unsigned int j =i; j<n;j++){//loop through all hits after current hit
-		  //std::cout << "inner:" << i << " " << j << " " << n << std::endl;
-                  if(!used[j]){
-                    float timej   = hit->getTimeCont(j);
-                    float energyj = hit->getEnergyCont(j);
-                    float deltat = fabs(timei-timej);
-                    //              std::cout << " HCAL  deltat : " << deltat << std::endl;
+                used[ii] = true;
+                for(unsigned int jj =ii; jj<n;jj++){//loop through all hits after current hit
+		  //std::cout << "inner:" << ii << " " << jj << " " << n << std::endl;
+                  if(!used[jj]){
+                    float timej   = hit->getTimeCont(jj);
+                    float energyj = hit->getEnergyCont(jj);
+                    float deltat_ = fabs(timei-timej);
+                    //              std::cout << " HCAL  deltat : " << deltat_ << std::endl;
 		    if (_hcalSimpleTimingCut){
-			    float deltat = _hcalCorrectTimesForPropagation?dt:0;
-			    if (timej-deltat>_hcalTimeWindowMin && timej-deltat<hcalTimeWindowMax){
+			    float deltat2 = _hcalCorrectTimesForPropagation?dt:0;
+			    if (timej-deltat2>_hcalTimeWindowMin && timej-deltat2<hcalTimeWindowMax){
 				    energySum += energyj;
 				    if (timej<timei){
 					    timei = timej; //use earliest hit time for simpletimingcut
 				    }
 			    }
 		    } else {
-			if(deltat<_hcalDeltaTimeHitResolution){ //if this subhit is close to current subhit, add this hit's energy to timecluster
+			if(deltat_<_hcalDeltaTimeHitResolution){ //if this subhit is close to current subhit, add this hit's energy to timecluster
 			if(energyj>energyi)timei=timej; //this is probably not what was intended. i guess this should find the largest hit of one timecluster and use its hittime for the cluster, but instead it compares the current hit energy to the sum of already found hit energies
 			//std::cout << timei << " - " << timej << std::endl;
 			//std::cout << energyi << " - " << energyj << std::endl;
 			energyi+=energyj;
-			used[j] = true;
+			used[jj] = true;
 			//std::cout << timei << " " << energyi << std::endl;
 			}
 		    }
