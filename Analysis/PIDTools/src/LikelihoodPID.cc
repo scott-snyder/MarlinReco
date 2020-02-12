@@ -390,7 +390,7 @@ double LikelihoodPID::get_dEdxChi2(int parttype, TVector3 p, float hit, double d
   }
 
   //cal. polar angle
-  double trkcos=p.CosTheta();
+  //double trkcos=p.CosTheta();
 
   //get nomalized dEdx
   double dEdx_Norm=get_Norm(dEdx);
@@ -408,31 +408,30 @@ double LikelihoodPID::get_dEdxChi2(int parttype, TVector3 p, float hit, double d
   return chi2;
 }
 
-double LikelihoodPID::get_dEdxFactor(int parttype, TVector3 p, float hit, double dEdx){
+double LikelihoodPID::get_dEdxFactor(int parttype, TVector3 /*p*/, float hit, double dEdx){
   //get parameters for chi2
-  double tmppar[5],tmpmass=0.0;
-  for(int i=0;i<5;i++) tmppar[i]=par[parttype][i];
+  //double tmpmass=0.0;
   //getmass
   switch(parttype){
   case 0:
-    tmpmass=emass;
+    //tmpmass=emass;
     break;
   case 1:
-    tmpmass=mmass;
+    //tmpmass=mmass;
     break;
   case 2:
-    tmpmass=pimass;
+    //tmpmass=pimass;
     break;
   case 3:
-    tmpmass=kmass;
+    //tmpmass=kmass;
     break;
   case 4:
-    tmpmass=pmass;
+    //tmpmass=pmass;
     break;
   }
 
   //cal. polar angle
-  double trkcos=p.CosTheta();
+  //double trkcos=p.CosTheta();
 
   //get nomalized dEdx
   double dEdx_Norm=get_Norm(dEdx);
@@ -1104,153 +1103,153 @@ double LikelihoodPID::getValue(int type, int valtype, double value){
 }
 
 double LikelihoodPID::getPenalty(int ptype, int hypothesis, double p){
-  double par[3]={0.0,0.0,0.0};
+  double par_[3]={0.0,0.0,0.0};
   //set parameters
   switch(ptype){
   case 0:  //electron
     if(hypothesis==0){
-      par[0]=0.0;
-      par[1]=1.0;
-      par[2]=1.00178;
+      par_[0]=0.0;
+      par_[1]=1.0;
+      par_[2]=1.00178;
 
     }else if(hypothesis==1){
-      par[0]=0.101945;
-      par[1]=2.18719;
-      par[2]=0.990000;
+      par_[0]=0.101945;
+      par_[1]=2.18719;
+      par_[2]=0.990000;
 
     }else if(hypothesis==2){
-      par[0]=0.104521;
-      par[1]=1.98490;
-      par[2]=0.990000;
+      par_[0]=0.104521;
+      par_[1]=1.98490;
+      par_[2]=0.990000;
 
     }else if(hypothesis==3){
-      par[0]=0.234299;
-      par[1]=0.276835;
-      par[2]=0.965973;
+      par_[0]=0.234299;
+      par_[1]=0.276835;
+      par_[2]=0.965973;
 
     }else{
-      par[0]=0.414613;
-      par[1]=-0.132530;
-      par[2]=0.949679;
+      par_[0]=0.414613;
+      par_[1]=-0.132530;
+      par_[2]=0.949679;
 
     }
 
     break;
   case 1:   //muon
     if(hypothesis==0){
-      par[0]=-0.00512190;
-      par[1]=-0.211835;
-      par[2]=1.00024;
+      par_[0]=-0.00512190;
+      par_[1]=-0.211835;
+      par_[2]=1.00024;
 
     }else if(hypothesis==1){
-      par[0]=0.0;
-      par[1]=1.00;
-      par[2]=0.999684;
+      par_[0]=0.0;
+      par_[1]=1.00;
+      par_[2]=0.999684;
 
     }else if(hypothesis==2){
-      par[0]=0.00833283;
-      par[1]=9.99995;
-      par[2]=0.999027;
+      par_[0]=0.00833283;
+      par_[1]=9.99995;
+      par_[2]=0.999027;
 
     }else if(hypothesis==3){
-      par[0]=0.0964021;
-      par[1]=-0.214469;
-      par[2]=0.989688;
+      par_[0]=0.0964021;
+      par_[1]=-0.214469;
+      par_[2]=0.989688;
 
     }else{
-      par[0]=0.318674;
-      par[1]=-0.197755;
-      par[2]=0.968436;
+      par_[0]=0.318674;
+      par_[1]=-0.197755;
+      par_[2]=0.968436;
     }
 
     break;
   case 2:   //pion
     if(hypothesis==0){
-      par[0]=-0.0123577;
-      par[1]=-0.141521;
-      par[2]=1.00273;
+      par_[0]=-0.0123577;
+      par_[1]=-0.141521;
+      par_[2]=1.00273;
 
     }else if(hypothesis==1){
-      par[0]=-0.00558462;
-      par[1]=-0.136941;
-      par[2]=1.00135;
+      par_[0]=-0.00558462;
+      par_[1]=-0.136941;
+      par_[2]=1.00135;
 
     }else if(hypothesis==2){
-      par[0]=0.0;
-      par[1]=1.0;
-      par[2]=1.00001;
+      par_[0]=0.0;
+      par_[1]=1.0;
+      par_[2]=1.00001;
 
     }else if(hypothesis==3){
-      par[0]=0.122083;
-      par[1]=-0.1333923;
-      par[2]=0.976863;
+      par_[0]=0.122083;
+      par_[1]=-0.1333923;
+      par_[2]=0.976863;
 
     }else{
-      par[0]=0.401111;
-      par[1]=-0.116807;
-      par[2]=0.930906;
+      par_[0]=0.401111;
+      par_[1]=-0.116807;
+      par_[2]=0.930906;
     }
 
     break;
   case 3:    //kaon
     if(hypothesis==0){
-      par[0]=-0.102300;
-      par[1]=-0.139570;
-      par[2]=1.01362;
+      par_[0]=-0.102300;
+      par_[1]=-0.139570;
+      par_[2]=1.01362;
 
     }else if(hypothesis==1){
-      par[0]=-0.0973257;
-      par[1]=-0.138932;
-      par[2]=1.01293;
+      par_[0]=-0.0973257;
+      par_[1]=-0.138932;
+      par_[2]=1.01293;
 
     }else if(hypothesis==2){
-      par[0]=-0.0936450;
-      par[1]=-0.138469;
-      par[2]=1.01242;
+      par_[0]=-0.0936450;
+      par_[1]=-0.138469;
+      par_[2]=1.01242;
 
     }else if(hypothesis==3){
-      par[0]=0.0;
-      par[1]=1.0;
-      par[2]=0.999865;
+      par_[0]=0.0;
+      par_[1]=1.0;
+      par_[2]=0.999865;
 
     }else{
-      par[0]=0.223317;
-      par[1]=-0.101273;
-      par[2]=0.973484;
+      par_[0]=0.223317;
+      par_[1]=-0.101273;
+      par_[2]=0.973484;
     }
 
     break;
   case 4:   //proton
     if(hypothesis==0){
-      par[0]=-0.260150;
-      par[1]=-0.0990612;
-      par[2]=1.02854;
+      par_[0]=-0.260150;
+      par_[1]=-0.0990612;
+      par_[2]=1.02854;
 
     }else if(hypothesis==1){
-      par[0]=-0.256503;
-      par[1]=-0.0976728;
-      par[2]=1.02811;
+      par_[0]=-0.256503;
+      par_[1]=-0.0976728;
+      par_[2]=1.02811;
 
     }else if(hypothesis==2){
-      par[0]=-0.253788;
-      par[1]=-0.0966732;
-      par[2]=1.02779;
+      par_[0]=-0.253788;
+      par_[1]=-0.0966732;
+      par_[2]=1.02779;
 
     }else if(hypothesis==3){
-      par[0]=-0.183031;
-      par[1]=-0.0742123;
-      par[2]=1.01965;
+      par_[0]=-0.183031;
+      par_[1]=-0.0742123;
+      par_[2]=1.01965;
 
     }else{
-      par[0]=0.0;
-      par[1]=1.0;
-      par[2]=0.999791;
+      par_[0]=0.0;
+      par_[1]=1.0;
+      par_[2]=0.999791;
     }
 
     break;
   }
 
-  return par[0]/sqrt(p*p+par[1])+par[2]; 
+  return par_[0]/sqrt(p*p+par_[1])+par_[2]; 
 }
 
 void LikelihoodPID::CalculateDeltaPosition(float charge, TVector3 p, const float* calpos){

@@ -487,7 +487,7 @@ void TPCDigiProcessor::processEvent( LCEvent * evt )
       
       _SimTHit = dynamic_cast<SimTrackerHit*>( STHcol->getElementAt( i ) ) ;
       
-      float edep;
+      float edep_;
       double padPhi(0.0);
       double padTheta (0.0);
       
@@ -675,7 +675,7 @@ void TPCDigiProcessor::processEvent( LCEvent * evt )
         continue;
       }
       
-      edep = _SimTHit->getEDep();
+      edep_ = _SimTHit->getEDep();
       
       // Calculate Point Resolutions according to Ron's Formula 
       
@@ -746,10 +746,10 @@ void TPCDigiProcessor::processEvent( LCEvent * evt )
       }
       
       //get energy deposit of this row
-      edep=_SimTHit->getEDep();
+      edep_=_SimTHit->getEDep();
 
       // create a tpc voxel hit and store it for this row
-      Voxel_tpc * atpcVoxel = new Voxel_tpc(iRowHit,iPhiHit,iZHit, thisPoint, edep, tpcRPhiRes, tpcZRes);
+      Voxel_tpc * atpcVoxel = new Voxel_tpc(iRowHit,iPhiHit,iZHit, thisPoint, edep_, tpcRPhiRes, tpcZRes);
       
       _tpcRowHits.at(iRowHit).push_back(atpcVoxel);
       ++numberOfVoxelsCreated;
@@ -1091,8 +1091,6 @@ void TPCDigiProcessor::end()
 void TPCDigiProcessor::writeVoxelToHit( Voxel_tpc* aVoxel){
   
   const gear::TPCParameters& gearTPC = Global::GEAR->getTPCParameters() ;
-  const gear::PadRowLayout2D& padLayout = gearTPC.getPadLayout() ;
-  const gear::Vector2D padCoord = padLayout.getPadCenter(1) ;
   
   Voxel_tpc* seed_hit  = aVoxel;
   
@@ -1219,7 +1217,6 @@ void TPCDigiProcessor::writeMergedVoxelsToHit( vector <Voxel_tpc*>* hitsToMerge)
   
   const gear::TPCParameters& gearTPC = Global::GEAR->getTPCParameters() ;
   const gear::PadRowLayout2D& padLayout = gearTPC.getPadLayout() ;
-  const gear::Vector2D padCoord = padLayout.getPadCenter(1) ;
   
   TrackerHitImpl* trkHit = new TrackerHitImpl ;
   

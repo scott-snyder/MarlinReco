@@ -108,43 +108,43 @@ void QuarkJetPairing::processEvent( LCEvent * evt ) {
 
   float energy = 0;
  
-  float jet_ene[4];
-  float quark_ene[4];
+  //float jet_ene[4];
+  float quark_ene_[4];
      
   float jet_theta[4];
   float quark_theta[4]; 
      
-  float  jet_px[4];
-  float quark_px[4];
+  float  jet_px_[4];
+  float quark_px_[4];
      
-  float  jet_py[4];
-  float quark_py[4]; 
+  float  jet_py_[4];
+  float quark_py_[4]; 
      
-  float jet_pz[4];
-  float quark_pz[4];
+  float jet_pz_[4];
+  float quark_pz_[4];
      
-  float jet_ptot[4];
-  float quark_ptot[4];
+  float jet_ptot_[4];
+  float quark_ptot_[4];
      
   int quark[4][24]; 
   int jet[4][24]; 
      
   for(int i=0; i<4; i++){
        
-    jet_ene[i]=0;
-    quark_ene[i]=0;
+    //jet_ene[i]=0;
+    quark_ene_[i]=0;
        
     jet_theta[i]=0;
     quark_theta[i]=0;
        
-    jet_px[i]=0;
-    quark_px[i]=0;
-    jet_py[i]=0;
-    quark_py[i]=0;
-    jet_pz[i]=0;
-    quark_pz[i]=0;
-    jet_ptot[i]=0;
-    quark_ptot[i]=0;
+    jet_px_[i]=0;
+    quark_px_[i]=0;
+    jet_py_[i]=0;
+    quark_py_[i]=0;
+    jet_pz_[i]=0;
+    quark_pz_[i]=0;
+    jet_ptot_[i]=0;
+    quark_ptot_[i]=0;
   } 
 
      
@@ -155,24 +155,24 @@ void QuarkJetPairing::processEvent( LCEvent * evt ) {
    
   if (jetcol != 0) {
        
-    int nJETS = jetcol->getNumberOfElements()  ;
+    int nJETS_ = jetcol->getNumberOfElements()  ;
        
-    if (nJETS != 4) return; 
+    if (nJETS_ != 4) return; 
 
-    for(int i=0; i< nJETS ; i++){
+    for(int i=0; i< nJETS_ ; i++){
          
  
       ReconstructedParticle* j = dynamic_cast<ReconstructedParticle*>( jetcol->getElementAt( i ) ) ;
                
       if (j) {
 	    
-	jet_px[i]=j->getMomentum()[0]; 
-	jet_py[i]=j->getMomentum()[1];
-	jet_pz[i]=j->getMomentum()[2];
-	jet_ene[i]=j->getEnergy();
+	jet_px_[i]=j->getMomentum()[0]; 
+	jet_py_[i]=j->getMomentum()[1];
+	jet_pz_[i]=j->getMomentum()[2];
+	//jet_ene[i]=j->getEnergy();
  	    
       }  
-      jet_ptot[i]=sqrt(pow(jet_px[i], 2)+pow(jet_py[i], 2)+pow(jet_pz[i], 2));
+      jet_ptot_[i]=sqrt(pow(jet_px_[i], 2)+pow(jet_py_[i], 2)+pow(jet_pz_[i], 2));
     }
   }  
 
@@ -187,12 +187,12 @@ void QuarkJetPairing::processEvent( LCEvent * evt ) {
                
       if (q) {
 	    
-  	quark_px[e-6]=q->getMomentum()[0];
-  	quark_py[e-6]=q->getMomentum()[1];
-  	quark_pz[e-6]=q->getMomentum()[2];
-  	quark_ene[e-6]=q->getEnergy();
+  	quark_px_[e-6]=q->getMomentum()[0];
+  	quark_py_[e-6]=q->getMomentum()[1];
+  	quark_pz_[e-6]=q->getMomentum()[2];
+  	quark_ene_[e-6]=q->getEnergy();
       }
-      quark_ptot[e-6]=sqrt(pow(quark_px[e-6], 2)+pow(quark_py[e-6], 2)+pow(quark_pz[e-6], 2));
+      quark_ptot_[e-6]=sqrt(pow(quark_px_[e-6], 2)+pow(quark_py_[e-6], 2)+pow(quark_pz_[e-6], 2));
     } 
   }
       
@@ -203,8 +203,6 @@ void QuarkJetPairing::processEvent( LCEvent * evt ) {
  
   int counter_jets = 0; 
    
-  Float_t theta[4];
-  
   Float_t alpha[24];
   Float_t alpha_min = 9999; 
   int iperm_min = 0; 
@@ -212,7 +210,7 @@ void QuarkJetPairing::processEvent( LCEvent * evt ) {
   //////////////////////////////////////////permutation algorithm///////////////////////////////////////////
  
   for(int i=0; i<4; i++){
-    energy+=quark_ene[i];
+    energy+=quark_ene_[i];
   }
  
     if(energy >495){
@@ -245,7 +243,7 @@ void QuarkJetPairing::processEvent( LCEvent * evt ) {
       for(int n = 0; n < iperm; n++){
 	alpha[n] = 0;
 	for (int ijet=0; ijet<4; ijet++) { 
-	  alpha[n]+= acos(((jet_px[jet[ijet][n]]*quark_px[quark[ijet][n]])+(jet_py[jet[ijet][n]]*quark_py[quark[ijet][n]])+(jet_pz[jet[ijet][n]]*quark_pz[quark[ijet][n]]))/(jet_ptot[jet[ijet][n]]*quark_ptot[quark[ijet][n]]));
+	  alpha[n]+= acos(((jet_px_[jet[ijet][n]]*quark_px_[quark[ijet][n]])+(jet_py_[jet[ijet][n]]*quark_py_[quark[ijet][n]])+(jet_pz_[jet[ijet][n]]*quark_pz_[quark[ijet][n]]))/(jet_ptot_[jet[ijet][n]]*quark_ptot_[quark[ijet][n]]));
 	}
 	if(alpha[n] < alpha_min){
 	  alpha_min = alpha[n];
@@ -263,9 +261,8 @@ void QuarkJetPairing::processEvent( LCEvent * evt ) {
 	
 	  //////////////////////////////////////////// Determination of theta //////////////////////////
 	
-	  theta[ijet]=0;
-	  quark_theta[ijet] = atan((sqrt((pow(quark_px[quark[ijet][iperm_min]],2))+(pow(quark_py[quark[ijet][iperm_min]],2))))/quark_pz[quark[ijet][iperm_min]]);
-	  jet_theta[ijet] = atan((sqrt((pow(jet_px[jet[ijet][iperm_min]],2))+(pow(jet_py[jet[ijet][iperm_min]],2))))/jet_pz[jet[ijet][iperm_min]]);
+	  quark_theta[ijet] = atan((sqrt((pow(quark_px_[quark[ijet][iperm_min]],2))+(pow(quark_py_[quark[ijet][iperm_min]],2))))/quark_pz_[quark[ijet][iperm_min]]);
+	  jet_theta[ijet] = atan((sqrt((pow(jet_px_[jet[ijet][iperm_min]],2))+(pow(jet_py_[jet[ijet][iperm_min]],2))))/jet_pz_[jet[ijet][iperm_min]]);
 	  if(quark_theta[ijet] < 0){
 	    quark_theta[ijet] = M_PI+quark_theta[ijet];	
 	  }
