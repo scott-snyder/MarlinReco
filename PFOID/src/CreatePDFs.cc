@@ -487,10 +487,10 @@ void CreatePDFs::processEvent( LCEvent * evt ) {
           Track *track=NULL;
           FloatVec weight = TrackToMCPNav.getRelatedFromWeights(mcp);
           float weightmax=-1.0;
-          for(unsigned int i=0; i<ovt.size(); i++){
-            if(weight[i]>weightmax){
-              weightmax=weight[i];
-              track = dynamic_cast<Track*>(ovt[i]);
+          for(unsigned int ii=0; ii<ovt.size(); ii++){
+            if(weight[ii]>weightmax){
+              weightmax=weight[ii];
+              track = dynamic_cast<Track*>(ovt[ii]);
             }// if ...
           }// for( int i=0 ...
           if(track!=NULL){
@@ -576,10 +576,10 @@ void CreatePDFs::processEvent( LCEvent * evt ) {
       
       if(!noCluster){
         delete helix;
-        delete ca;
-        delete cx;
-        delete cy;
-        delete cz;
+        delete[] ca;
+        delete[] cx;
+        delete[] cy;
+        delete[] cz;
         delete clsp;
       }
     }// for i ... Reco Particles

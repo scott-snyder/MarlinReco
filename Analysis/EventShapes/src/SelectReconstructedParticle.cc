@@ -89,7 +89,7 @@ void SelectReconstructedParticle::processEvent( LCEvent * evt ) {
       float totparmom;
       const double *pparmom;
       //      float x;
-      pparmom = dynamic_cast<ReconstructedParticle*>(inParVec->getElementAt(i))->getMomentum();
+      pparmom = dynamic_cast<ReconstructedParticle&>(*inParVec->getElementAt(i)).getMomentum();
 
 
       // (inParVec->getElementAt(i))->getMomentum();
@@ -98,7 +98,7 @@ void SelectReconstructedParticle::processEvent( LCEvent * evt ) {
                       + pparmom[2]*pparmom[2]); 
       if (totparmom >= _minimumMomentum &&
           totparmom <= 5000 &&
-          !dynamic_cast<ReconstructedParticle*>(inParVec->getElementAt(i))->isCompound()) { 
+          !dynamic_cast<ReconstructedParticle&>(*inParVec->getElementAt(i)).isCompound()) { 
 	good++;
 	if (good <3000) 
 	outParVec->addElement(inParVec->getElementAt(i));

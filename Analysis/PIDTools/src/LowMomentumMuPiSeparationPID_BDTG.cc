@@ -141,12 +141,8 @@ Int_t LowMomentumMuPiSeparationPID_BDTG::MuPiSeparation(TLorentzVector pp, EVENT
    float clpox=0;
    float clpoy=0;
    float clpoz=0;
-   float chene[10000]={0};
    float chpox[10000]={0};
    float chpoy[10000]={0};
-   float chpoz[10000]={0};
-
-   int nhit=0;
 
   float Rhits_clu = 0;
   float Rhits2_clu = 0;
@@ -157,8 +153,6 @@ Int_t LowMomentumMuPiSeparationPID_BDTG::MuPiSeparation(TLorentzVector pp, EVENT
   float cosalphacluster=0;
   unsigned nch=0;
  
-  const EVENT::TrackStateVec & tss = trk->getTrackStates() ;
-  
   const lcio::TrackState* ts ;
   
   ts = trk->getTrackState( lcio::TrackState::AtCalorimeter )  ;
@@ -181,11 +175,8 @@ Int_t LowMomentumMuPiSeparationPID_BDTG::MuPiSeparation(TLorentzVector pp, EVENT
           
           nch =tempvec.size();
           for( unsigned jhit=0; jhit < nch ; ++jhit ) {
-              nhit = tempvec.size();
-              chene[jhit] =  tempvec[jhit]->getEnergy();
               chpox[jhit] =  tempvec[jhit]->getPosition()[0];
               chpoy[jhit] =  tempvec[jhit]->getPosition()[1];
-              chpoz[jhit] =  tempvec[jhit]->getPosition()[2];
           }
       }
   }
