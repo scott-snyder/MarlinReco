@@ -259,7 +259,7 @@ const IntVec&  TrueJet_Parser::final_siblings( int ijet ) {
   LCObjectVec fcnvec = relfcn->getRelatedToObjects( jets->at(ijet) );
   int nsibl=0;
   for ( unsigned kk=0 ; kk<fcnvec.size() ; kk++ ) {
-    ReconstructedParticleVec jetvec= dynamic_cast<ReconstructedParticle*>(fcnvec[kk])->getParticles();
+    ReconstructedParticleVec jetvec= dynamic_cast<ReconstructedParticle&>(*fcnvec[kk]).getParticles();
     for ( unsigned jj=0 ; jj<jetvec.size() ; jj++ ) {
       if ( jetvec[jj] != jets->at(ijet) ) {
         // sibling
@@ -279,7 +279,7 @@ const IntVec& TrueJet_Parser::initial_siblings( int ijet ){
   LCObjectVec icnvec = relicn->getRelatedToObjects( jets->at(ijet) );
   int nsibl=0;
   for ( unsigned kk=0 ; kk<icnvec.size() ; kk++ ) {
-    ReconstructedParticleVec jetvec= dynamic_cast<ReconstructedParticle*>(icnvec[kk])->getParticles();
+    ReconstructedParticleVec jetvec= dynamic_cast<ReconstructedParticle&>(*icnvec[kk]).getParticles();
     for ( unsigned jj=0 ; jj<jetvec.size() ; jj++ ) {
       if ( jetvec[jj] != jets->at(ijet) ) {
         int jjet=jetvec[jj]->ext<JetIndex>();

@@ -212,7 +212,8 @@ void AddClusterProperties::processEvent( LCEvent * evt ) {
         shape[sum_wgt4_index]=sum_wgt4; 
  
 
-        if ( clu->getEnergyError() == 0.0 ) {
+        float Eerror=clu->getEnergyError();
+        if ( Eerror == 0.0 ) {
             // not set, so as per HLRWS:
           float E=clu->getEnergy();
           const FloatVec pec  = clu->getSubdetectorEnergies();
