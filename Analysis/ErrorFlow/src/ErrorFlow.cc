@@ -277,6 +277,7 @@ void ErrorFlow::processEvent( LCEvent * evt ) {
 		 for ( size_t iPFO = 0; iPFO < nPFOs; ++iPFO ) {
 			// Set a pointer to the i-th PFO
 			ReconstructedParticle *particlePtr = jetPFOs[ iPFO ];
+                        if (!particlePtr) continue;
 			LCObjectVec vecMCTL = navMCTL->getRelatedToObjects( particlePtr );
 			int nTrackspfo = (particlePtr->getTracks()).size();
 
