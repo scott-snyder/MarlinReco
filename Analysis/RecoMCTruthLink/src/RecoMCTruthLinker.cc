@@ -1185,7 +1185,9 @@ void RecoMCTruthLinker::clusterLinker(  LCEvent * evt,  LCCollection* mcpCol ,  
             //    <<" mapped to " <<remap_as_you_go.find(mcp)->second << std::endl;
             continue ; 
           }
-          mcp=remap_as_you_go.find(mcp)->second;
+          if (auto it = remap_as_you_go.find(mcp); it != remap_as_you_go.end()) {
+            mcp = it->second;
+          }
           mcpEnergy[ mcp ] +=  e ;// count the hit-energy caused by this true particle
           eTot += e ;             // total energy
           ehit+= e;
