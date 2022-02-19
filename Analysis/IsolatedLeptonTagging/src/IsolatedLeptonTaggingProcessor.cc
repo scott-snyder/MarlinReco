@@ -165,6 +165,11 @@ IsolatedLeptonTaggingProcessor::IsolatedLeptonTaggingProcessor() : Processor("Is
 			     "use impact parameters"  ,
 			     _use_ip ,
 			     bool(true) );
+
+  registerProcessorParameter("FindLepPairs",
+                             "Try to allow finding closely-spaced same-flavor opposite-sign lepton (e, mu) pairs",
+                             _findLepPairs,
+                             bool(false) );
 }
 
 void IsolatedLeptonTaggingProcessor::init() { 
@@ -304,7 +309,7 @@ void IsolatedLeptonTaggingProcessor::processEvent( LCEvent * evt ) {
     Double_t pFSR[4] = {0.,0.,0.,0.};  // 4-momentum of BS/FSR if any found, not being used by MVA
     Double_t pLargeCone[4]  = {0.,0.,0.,0.}; // 4-momentum of all particles inside the larger cone
     Int_t nConePhoton = 0;  // number of BS/FSR photons found, not being used by MVA
-    getConeEnergy(recPart,colPFO,_cosConeSmall,woFSR,coneEnergy0,pFSR,_cosConeLarge,pLargeCone,nConePhoton);
+    getConeEnergy(recPart,colPFO,_cosConeSmall,woFSR,coneEnergy0,pFSR,_cosConeLarge,pLargeCone,nConePhoton,_findLepPairs);
     Double_t coneEN     = coneEnergy0[1];
     Double_t coneEC     = coneEnergy0[2];
     TLorentzVector lortzLargeCone = TLorentzVector(pLargeCone[0],pLargeCone[1],pLargeCone[2],pLargeCone[3]);

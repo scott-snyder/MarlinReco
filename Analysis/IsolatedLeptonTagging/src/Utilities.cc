@@ -415,7 +415,9 @@ void getConeEnergy(ReconstructedParticle *recPart, LCCollection *colPFO, Double_
 }
 
 void getConeEnergy(ReconstructedParticle *recPart, LCCollection *colPFO, Double_t cosCone, Bool_t woFSR, Double_t coneEnergy[3], Double_t pFSR[4], 
-		   Double_t cosCone2, Double_t pCone2[4], Int_t &nConePhoton ) { 
+		   Double_t cosCone2, Double_t pCone2[4], Int_t &nConePhoton,
+                   bool findLepPairs)
+{ 
   // get the cone energy of the particle
   // add another larger cone
   //  woFSR = kTRUE;
@@ -424,6 +426,27 @@ void getConeEnergy(ReconstructedParticle *recPart, LCCollection *colPFO, Double_
   Int_t nPFOs = colPFO->getNumberOfElements();
   TVector3 momentum0 = TVector3(recPart->getMomentum());
   nConePhoton = 0;
+  auto sumToCone = [&] (ReconstructedParticle* pfo)
+    { 
+      Double_t energy = pfo->getEnergy();
+      Double_t charge = pfo->getCharge();
+      coneEnergy[0] += energy;
+      if (TMath::Abs(charge) < 0.5) {
+	coneEnergy[1] += energy;
+      }
+      else {
+	coneEnergy[2] += energy;
+      }
+      Int_t iType = getLeptonID(pfo);
+      if (iType == 22) nConePhoton++;
+    };
+  auto sumToCone2 = [&] (const ReconstructedParticle* pfo)
+    { 
+      Double_t energy = pfo->getEnergy();
+      TVector3 momentum = TVector3(pfo->getMomentum());
+      lortzCon += TLorentzVector(momentum,energy);
+    };
+  ReconstructedParticle* ignored = nullptr;
   for (Int_t i=0;i<nPFOs;i++) {
     ReconstructedParticle *pfo = dynamic_cast<ReconstructedParticle*>(colPFO->getElementAt(i));
     if (pfo == recPart) continue;
@@ -438,21 +461,25 @@ void getConeEnergy(ReconstructedParticle *recPart, LCCollection *colPFO, Double_
 	continue;
       }
     }
-    Double_t charge = pfo->getCharge();
     Double_t cosTheta = momentum0.Dot(momentum)/momentum0.Mag()/momentum.Mag();
+    ReconstructedParticle* partToSum = pfo;
+    if (findLepPairs && (cosTheta > cosCone || cosTheta > cosCone2)) {
+      if (pfo->getType() + recPart->getType() == 0 &&
+          (std::abs(pfo->getType()) == 11 || std::abs(pfo->getType()) == 13) &&
+          (ignored == nullptr || energy > ignored->getEnergy()))
+      {
+        partToSum = ignored;
+        ignored = pfo;
+        if (!partToSum) continue;
+        momentum = TVector3(partToSum->getMomentum());
+        cosTheta = momentum0.Dot(momentum)/momentum0.Mag()/momentum.Mag();
+      }
+    }
     if (cosTheta > cosCone) {
-      coneEnergy[0] += energy;
-      if (TMath::Abs(charge) < 0.5) {
-	coneEnergy[1] += energy;
-      }
-      else {
-	coneEnergy[2] += energy;
-      }
-      Int_t iType = getLeptonID(pfo);
-      if (iType == 22) nConePhoton++;
+      sumToCone (partToSum);
     }
     if (cosTheta > cosCone2) {
-      lortzCon += TLorentzVector(momentum,energy);
+      sumToCone2 (partToSum);
     }
   }
   pFSR[0] = lortzFSR.Px();
