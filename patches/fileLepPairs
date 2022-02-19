@@ -1,0 +1,10 @@
+Bottom: e7fc8d81e6888a78fd9fa062d88f6951ad486d04
+Top:    e7fc8d81e6888a78fd9fa062d88f6951ad486d04
+Author: scott snyder <snyder@bnl.gov>
+Date:   2022-02-18 22:27:40 -0500
+
+Finding close-together SFOS leptons.
+
+Tweak IsolatedLeptonTaggingProcessor so that it can find close-together
+SFOS leptons.  When summing the isolation cones for an electron or muon,
+ignore the highest-energy SFOS lepton.
