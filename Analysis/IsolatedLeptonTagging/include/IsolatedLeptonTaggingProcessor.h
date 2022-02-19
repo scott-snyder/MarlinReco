@@ -78,6 +78,8 @@ class IsolatedLeptonTaggingProcessor : public marlin::Processor {
 
   float _mvaCutForElectron{}, _mvaCutForMuon{};
 
+  bool _findLepPairs { false };
+
 } ;
 
 #endif

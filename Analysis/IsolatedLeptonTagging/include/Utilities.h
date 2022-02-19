@@ -46,7 +46,8 @@ namespace isolep{
 //void getConeEnergy(ReconstructedParticle *recPart, LCCollection *colPFO, Double_t cosCone, Bool_t woFSR, TVector3 coneEnergy0);
   void getConeEnergy(ReconstructedParticle *recPart, LCCollection *colPFO, Double_t cosCone, Bool_t woFSR, Double_t coneEnergy[3], Double_t pFSR[4]);
   void getConeEnergy(ReconstructedParticle *recPart, LCCollection *colPFO, Double_t cosCone, Bool_t woFSR, Double_t coneEnergy[3], Double_t pFSR[4], 
-		     Double_t conCone2, Double_t pCone2[4], Int_t &nConePhoton);
+		     Double_t conCone2, Double_t pCone2[4], Int_t &nConePhoton,
+                     bool findLepPairs = false);
   void getConeEnergy(ReconstructedParticle *recPart, LCCollection *colPFO, Double_t cosCone,
 		     Double_t coneEnergy[3], Double_t cosCone2, Double_t pCone2[4]);
   TLorentzVector getFSRMomentum(ReconstructedParticle *recPart, LCCollection *colPFO);
