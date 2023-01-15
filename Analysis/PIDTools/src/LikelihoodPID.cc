@@ -390,7 +390,7 @@ double LikelihoodPID::get_dEdxChi2(int parttype, TVector3 p, float hit, double d
   }
 
   //cal. polar angle
-  double trkcos=p.CosTheta();
+  //double trkcos=p.CosTheta();
 
   //get nomalized dEdx
   double dEdx_Norm=get_Norm(dEdx);
@@ -408,7 +408,7 @@ double LikelihoodPID::get_dEdxChi2(int parttype, TVector3 p, float hit, double d
   return chi2;
 }
 
-double LikelihoodPID::get_dEdxFactor(int parttype, TVector3 p, float hit, double dEdx){
+double LikelihoodPID::get_dEdxFactor(int parttype, TVector3 /*p*/, float hit, double dEdx){
   //get parameters for chi2
   //double tmpmass=0.0;
   //getmass
@@ -431,7 +431,7 @@ double LikelihoodPID::get_dEdxFactor(int parttype, TVector3 p, float hit, double
   }
 
   //cal. polar angle
-  double trkcos=p.CosTheta();
+  //double trkcos=p.CosTheta();
 
   //get nomalized dEdx
   double dEdx_Norm=get_Norm(dEdx);
