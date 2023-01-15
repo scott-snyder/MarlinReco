@@ -1,0 +1,6 @@
+Bottom: 844e47c233af6497fc34c832741f23e8ac5537ac
+Top:    44fda359f5d555019da59a7550ce5edcc38b2a0d
+Author: scott snyder <sss@karma>
+Date:   2021-01-15 15:17:43 -0500
+
+Protections against null pointer dereference.
