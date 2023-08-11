@@ -7,7 +7,7 @@ using namespace std;
 
 Voxel_tpc::Voxel_tpc(){
 }
-Voxel_tpc::Voxel_tpc(int row, int phi, int z, double pos[3], double posRPhi[2], double edep, double RPhiRes, double ZRes)
+Voxel_tpc::Voxel_tpc(int row, int phi, int z, double pos[3], double /*posRPhi*/[2], double edep, double RPhiRes, double ZRes)
 {
   _row_index = row;
   _phi_index = phi;
