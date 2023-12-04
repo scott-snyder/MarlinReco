@@ -1,0 +1,8 @@
+Bottom: 3950f53554ee0a9018115798a3ba05561f3f5a54
+Top:    3950f53554ee0a9018115798a3ba05561f3f5a54
+Author: scott snyder <sss@karma>
+Date:   2023-12-03 19:00:09 -0500
+
+Fix compilation with gcc14.
+
+Missing #include of <algorithm>.
