@@ -17,6 +17,7 @@
 #include <assert.h>
 #include <cmath>
 #include <set>
+#include <algorithm>
 
 #include "CLHEP/Random/Random.h"
 #include "CLHEP/Random/RandGauss.h"
