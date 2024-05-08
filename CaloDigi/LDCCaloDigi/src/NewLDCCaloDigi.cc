@@ -225,7 +225,10 @@ void NewLDCCaloDigi::init() {
   _nEvt = 0;
 
   //fg: need to set default encoding in for reading old files...
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
   CellIDDecoder<SimCalorimeterHit>::setDefaultEncoding("M:3,S-1:3,I:9,J:9,K-1:6") ;
+#pragma GCC diagnostic pop
 
   // Calorimeter geometry from GEAR
   const gear::CalorimeterParameters& pEcalBarrel = Global::GEAR->getEcalBarrelParameters();
