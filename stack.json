@@ -1,14 +1,14 @@
 {
   "version": 5,
-  "prev": "006e46f06a379778fa51861c96bcd119d1e1f90a",
-  "head": "038b7f27102780529ef04caac61a340777dc5794",
-  "applied": [
+  "prev": "be83367c6d137c1141c19656d3f31ca21ea8ed53",
+  "head": "c5c492c1ab66a18dad61a8df54c76c9110f7360b",
+  "applied": [],
+  "unapplied": [
     "gitignore",
     "warn",
     "nullptr",
     "gcc14"
   ],
-  "unapplied": [],
   "hidden": [],
   "patches": {
     "gitignore": {
