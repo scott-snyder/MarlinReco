@@ -657,7 +657,7 @@ void ILDCaloDigi::init() {
       }
     }
 
-  } catch(gear::UnknownParameterException &e) {
+  } catch(gear::UnknownParameterException &) {
     streamlog_out (WARNING) << "WARNING, could not get ECAL gear parameters!" << endl;
   }
 
@@ -866,9 +866,9 @@ void ILDCaloDigi::processEvent( LCEvent * evt ) {
             float eCellInTime = 0.;
             float eCellOutput = 0.;
 
-            for(unsigned int i =0; i<n;i++){
-              float timei   = hit->getTimeCont(i);
-              float energyi = hit->getEnergyCont(i);
+            for(unsigned int ii =0; ii<n;ii++){
+              float timei   = hit->getTimeCont(ii);
+              float energyi = hit->getEnergyCont(ii);
       	      float energySum = 0;
 
               float deltat = 0;
@@ -1100,9 +1100,9 @@ void ILDCaloDigi::processEvent( LCEvent * evt ) {
 
             int count = 0;
          
-            for(unsigned int i =0; i<n;i++){ // loop over all subhits
-              float timei   = hit->getTimeCont(i); //absolute hit timing of current subhit
-              float energyi = hit->getEnergyCont(i); //energy of current subhit
+            for(unsigned int ii =0; ii<n;ii++){ // loop over all subhits
+              float timei   = hit->getTimeCont(ii); //absolute hit timing of current subhit
+              float energyi = hit->getEnergyCont(ii); //energy of current subhit
 	      float energySum = 0;
 	      //std::cout <<"outer:" << i << " " << n << std::endl;
 
@@ -1116,7 +1116,7 @@ void ILDCaloDigi::processEvent( LCEvent * evt ) {
               //sum up hit energies within timeWindowMin and timeWindowMax, use earliest subhit in this window as hit time for resulting calohit.
               //only one calorimeterhit will be generated from this.
               
-              if(!used[i]){ //if current subhit has not been merged with previous hits already, take current hit as starting point to merge hits
+              if(!used[ii]){ //if current subhit has not been merged with previous hits already, take current hit as starting point to merge hits
                 // merge with other hits?
                 used[i] = true;
                 for(unsigned int j =i; j<n;j++){//loop through all hits after current hit
@@ -1140,7 +1140,7 @@ void ILDCaloDigi::processEvent( LCEvent * evt ) {
 			//std::cout << timei << " - " << timej << std::endl;
 			//std::cout << energyi << " - " << energyj << std::endl;
 			energyi+=energyj;
-			used[j] = true;
+			used[jj] = true;
 			//std::cout << timei << " " << energyi << std::endl;
 			}
 		    }

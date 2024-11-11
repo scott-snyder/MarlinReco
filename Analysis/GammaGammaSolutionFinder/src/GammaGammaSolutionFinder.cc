@@ -1,3 +1,6 @@
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
+
+
 #include "EVENT/LCIO.h"
 #include "EVENT/LCRunHeader.h"
 #include "EVENT/LCCollection.h"
