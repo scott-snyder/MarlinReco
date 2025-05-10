@@ -1,0 +1,8 @@
+Bottom: 966827d4d4ab79cb7951f377b49c97a13f4b6a4f
+Top:    966827d4d4ab79cb7951f377b49c97a13f4b6a4f
+Author: sss <sss@karma>
+Date:   2025-05-09 22:45:59 -0400
+
+Convert latin-1 to utf-8.
+
+Avoid some clang warnings.
