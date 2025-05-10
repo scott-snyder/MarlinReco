@@ -191,7 +191,7 @@ void VXDGeometry::test() {
   int nHit = 1000;
 
   // initialize gsl random generator
-  // ranlux algorithm of Lüscher, which produces 'luxury random numbers'
+  // ranlux algorithm of LÃ¼scher, which produces 'luxury random numbers'
   gsl_rng* r = gsl_rng_alloc(gsl_rng_ranlxs2);
 
   const gear::VXDParameters& gearVXD = _gearMgr->getVXDParameters();
