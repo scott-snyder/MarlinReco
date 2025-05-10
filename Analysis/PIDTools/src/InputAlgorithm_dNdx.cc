@@ -213,7 +213,7 @@ float InputAlgorithm_dNdx::computePointInTracker(HelixClass& helix, float* ref, 
   float points[6];
   float success = helix.getPointOnCircle(radius, ref, points);
   if (success > -1e20) {
-    if (abs(points[2] > zmax && abs(points[5]) > zmax)) {
+    if (abs(points[2]) > zmax && abs(points[5]) > zmax) {
       helix.getPointInZ(zmax, ref, points);
       if (points[1] == 0)
         phi = points[0] < 0 ? M_PI * 0.5 : M_PI * 1.5;

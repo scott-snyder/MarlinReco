@@ -31,15 +31,17 @@
 
 dEdxPoint::dEdxPoint(const double _dE, const double _dx) : dE(_dE), dx(_dx), dEdx(_dE / _dx) {}
 
-dEdxPoint::dEdxPoint(const dEdxPoint& orig)
-    : dE(orig.Get_dE()), dx(orig.Get_dx()), dEdx(orig.Get_dE() / orig.Get_dx()) {}
-
 SiTracker_dEdxProcessor aSiTracker_dEdxProcessor;
 
-SiTracker_dEdxProcessor::SiTracker_dEdxProcessor()
-    : Processor("SiTracker_dEdxProcessor"), m_trackCollName(""), m_trkHitCollNames(), surfMap(NULL), trkSystem(NULL),
-      _bField(0), layerFinder(NULL), lastRunHeaderProcessed(-1), timers(),
-      lastTP(std::chrono::high_resolution_clock::now()), newTP(std::chrono::high_resolution_clock::now()) {
+SiTracker_dEdxProcessor::SiTracker_dEdxProcessor() : Processor("SiTracker_dEdxProcessor"),
+    m_trackCollName(""), m_trkHitCollNames(),
+    surfMap(NULL), trkSystem(NULL), _bField(0),
+    layerFinder(NULL),
+    lastRunHeaderProcessed(-1),
+    timers(),
+    lastTP(std::chrono::high_resolution_clock::now()),
+    newTP(std::chrono::high_resolution_clock::now())
+    {
 
   // modify processor description
   _description = "SiTracker_dEdxProcessor calculates dE/dx for planar silicon trackers";
@@ -60,13 +62,10 @@ SiTracker_dEdxProcessor::SiTracker_dEdxProcessor()
   registerProcessorParameter("TrkHitCollections", "Tracker hit collections that will be analysed", m_trkHitCollNames,
                              defaultTrkHitCollections);
 
-  int elementMask = 0;
-  for (unsigned ibit = 0; ibit < sizeof(int) * CHAR_BIT; ibit++) {
-    elementMask += 1 << ibit;
-  }
-
-  registerProcessorParameter("CheatSensorThicknesses", "Shall we use the sensitive thicknesses from parameters?",
-                             m_cheatSensorThicknesses, false);
+  registerProcessorParameter("CheatSensorThicknesses" ,
+                             "Shall we use the sensitive thicknesses from parameters?",
+                             m_cheatSensorThicknesses ,
+                             false ) ;
 
   FloatVec sensThicknessCheatVals;
   for (unsigned i = 0; i < defaultTrkHitCollections.size(); i++) {

@@ -34,15 +34,15 @@ using namespace marlin;
 
 class SLDCorrection : public Processor {
 public:
-  virtual Processor* newProcessor() { return new SLDCorrection; }
+  virtual Processor* newProcessor() override { return new SLDCorrection; }
   SLDCorrection();
   virtual ~SLDCorrection() = default;
   SLDCorrection(const SLDCorrection&) = delete;
   SLDCorrection& operator=(const SLDCorrection&) = delete;
-  virtual void init();
+  virtual void init() override;
   virtual void Clear();
-  virtual void processRunHeader();
-  virtual void processEvent(EVENT::LCEvent* pLCEvent);
+  virtual void processRunHeader(lcio::LCRunHeader*) override;
+  virtual void processEvent(EVENT::LCEvent* pLCEvent) override;
 
   //	hasPrimarySLDecay checks if a MCParticle (potentially a B-/C-Hadron) decays semi-leptonically) true: decays
   // semi-leptonically, false: doesn't decay semi-leptonically
@@ -131,9 +131,9 @@ public:
 
   void checkSLDInput(const MCP& SLDHadron);
 
-  virtual void check(EVENT::LCEvent* pLCEvent);
+  virtual void check(EVENT::LCEvent* pLCEvent) override;
 
-  virtual void end();
+  virtual void end() override;
 
   dd4hep::Detector& _theDetector = dd4hep::Detector::getInstance();
 
@@ -207,7 +207,6 @@ private:
   int m_nRunSum;
   int m_nEvtSum;
   double m_Bfield;
-  bool foundFlightDirection;
   IntVector m_SLDFlavour{};  // 4: SLDecayOfCHadron, 5: SLDecayOfBHadron, 15: SLDecayOfTauLepton
   IntVector m_SLDType{};     // 0: SLDecay with DownStream/UpStream semi-leptonic decay(s), 1: SLDecay without
                              // DownStream/UpStream semi-leptonic decay(s)
