@@ -34,7 +34,7 @@ SLDCorrection aSLDCorrection;
 
 SLDCorrection::SLDCorrection()
     : Processor("SLDCorrection"), m_nRun(0), m_nEvt(0), m_nRunSum(0), m_nEvtSum(0), m_Bfield(0.f),
-      foundFlightDirection(true), m_nSLDecayOfBHadron(0), m_nSLDecayOfCHadron(0), m_nSLDecayOfTauLepton(0),
+      m_nSLDecayOfBHadron(0), m_nSLDecayOfCHadron(0), m_nSLDecayOfTauLepton(0),
       m_nSLDecayTotal(0), m_nSLDecayToElectron(0), m_nSLDecayToMuon(0), m_nSLDecayToTau(0), m_nTauNeutrino(0),
       m_pTFile(NULL) {
   _description = "SLDCorrection finds semi-leptonic decays within jets and performs a correction to 4-momentum of the "
@@ -1133,7 +1133,7 @@ void SLDCorrection::Clear() {
   m_OtherParticle3DImpactParameter.clear();
 }
 
-void SLDCorrection::processRunHeader() {
+void SLDCorrection::processRunHeader(lcio::LCRunHeader*) {
   m_nRun = 0;
   m_nEvt = 0;
   ++m_nRunSum;
