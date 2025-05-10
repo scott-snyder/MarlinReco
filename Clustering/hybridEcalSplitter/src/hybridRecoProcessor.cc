@@ -428,7 +428,6 @@ std::vector<CalorimeterHit*> hybridRecoProcessor::getVirtualHits(LCEvent* evt, C
   }
 
   std::map<int, float> virtEnergy;
-  int nSplitters(0);
 
   // loop over splitter cols, find nearby hits
   for (int jj = 0; jj < 2; jj++) { // strips, cells
