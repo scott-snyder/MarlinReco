@@ -296,31 +296,26 @@ double Balance(LCEvent* evt) {
   double e_to_tubex = 0.;
   double e_to_tubey = 0.;
   double e_to_tubez = 0.;
-  int n_to_tube = 0;
 
   double e_neutr = 0.;
   double e_neutrx = 0.;
   double e_neutry = 0.;
   double e_neutrz = 0.;
-  int n_neutr = 0;
 
   double e_muon = 0.;
   double e_muonx = 0.;
   double e_muony = 0.;
   double e_muonz = 0.;
-  int n_muon = 0;
 
   double e_elect = 0.;
   double e_electx = 0.;
   double e_electy = 0.;
   double e_electz = 0.;
-  int n_elect = 0;
 
   double e_photon = 0.;
   double e_photonx = 0.;
   double e_photony = 0.;
   double e_photonz = 0.;
-  int n_photon = 0;
 
   double e_pi0 = 0.;
   double e_pi0x = 0.;
@@ -362,7 +357,6 @@ double Balance(LCEvent* evt) {
         e_to_tubex += px;
         e_to_tubey += py;
         e_to_tubez += pz;
-        n_to_tube++;
         continue;
       }
       if ((abs(idpdg) == 12) || (abs(idpdg) == 14) || (abs(idpdg) == 16)) {
@@ -370,7 +364,6 @@ double Balance(LCEvent* evt) {
         e_neutrx += px;
         e_neutry += py;
         e_neutrz += pz;
-        n_neutr++;
         continue;
       }
       if (abs(idpdg) == 13) { // mu+ mu-
@@ -378,7 +371,6 @@ double Balance(LCEvent* evt) {
         e_muonx += px;
         e_muony += py;
         e_muonz += pz;
-        n_muon++;
         continue;
       }
       if (abs(idpdg) == 11) { //  e+ e-

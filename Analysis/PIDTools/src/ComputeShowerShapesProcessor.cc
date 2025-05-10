@@ -73,8 +73,6 @@ void ComputeShowerShapesProcessor::init(LCEvent* evt) {
   ClusterShapeNames.push_back("rmsOf_hitradius");
   // ClusterShapeNames.push_back("Eclus_over_Ptrue");
 
-  _PFOCol->parameters().setValues("ClusterShapeParameters", ClusterShapeNames);
-
   printParameters();
 }
 

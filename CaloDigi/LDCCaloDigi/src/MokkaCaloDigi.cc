@@ -226,7 +226,7 @@ void MokkaCaloDigi::processEvent(LCEvent* evt) {
   _calorimeterHitVec.resize(numberOfZones);
   _relationCollection = new LCCollectionVec(LCIO::LCRELATION);
 
-  float simEnergy = 0;
+  //float simEnergy = 0;
 
   for (unsigned int i = 0; i < _hcalCollections.size(); ++i) {
     try {
@@ -256,7 +256,6 @@ void MokkaCaloDigi::processEvent(LCEvent* evt) {
     }
   }
 
-  float digitizedEnergy = 0.;
   LCCollectionVec* hcalcol = new LCCollectionVec(LCIO::CALORIMETERHIT);
   hcalcol->setFlag(flag.getFlag());
   for (int i = 0; i < numberOfZones; ++i) {
@@ -266,7 +265,7 @@ void MokkaCaloDigi::processEvent(LCEvent* evt) {
       CalorimeterHitImpl* calhit = myh->hit;
 
       float energy = calhit->getEnergy();
-      digitizedEnergy += energy;
+      //digitizedEnergy += energy;
       if (energy > _thresholdHcal) {
         int Cellid = calhit->getCellID0();
         float calibr_coeff(1.);

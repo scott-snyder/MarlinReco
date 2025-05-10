@@ -30,7 +30,8 @@ using namespace marlin;
 struct dEdxPoint {
 public:
   dEdxPoint(const double _dE, const double _dx);
-  dEdxPoint(const dEdxPoint&);
+  dEdxPoint(const dEdxPoint&) = default;
+  dEdxPoint& operator=(const dEdxPoint&) = default;
 
   double Get_dE() const { return dE; }
   double Get_dx() const { return dx; }
