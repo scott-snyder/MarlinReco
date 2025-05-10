@@ -1,15 +1,13 @@
 {
   "version": 5,
-  "prev": "e176c45aaefb246ca34c272d5c83bef4c8d1942b",
+  "prev": "2fc29378deffc55f722220af7cacfa652f828e15",
   "head": "5610a568d95cd1e1fa72cad564a407c8fb10de37",
   "applied": [
     "gitignore",
     "nullptr",
     "utf8"
   ],
-  "unapplied": [
-    "clang"
-  ],
+  "unapplied": [],
   "hidden": [],
   "patches": {
     "gitignore": {
@@ -20,9 +18,6 @@
     },
     "utf8": {
       "oid": "5610a568d95cd1e1fa72cad564a407c8fb10de37"
-    },
-    "clang": {
-      "oid": "9473e42b6a9678292b744fd2c0f3afad92dc9911"
     }
   }
 }
