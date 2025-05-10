@@ -68,8 +68,6 @@ private:
   double penalty[5][5]{};
   double prior[5]{};
   
-  double fact[5][5]{};
-  
   //weights for hadron likelihood calculation
   double _weights[6][20]{};
 
@@ -84,7 +82,7 @@ private:
   EVENT::FloatVec shapes{};
 
   bool _basicFlg{}, _dEdxFlg{}, _showerShapesFlg{};
-  int _usebayes{}, _usecorr{};
+  int _usebayes{};
   float _dEdxnorm{}, _dEdxerrfact{}, _bfield{};
   double _delpos[3]{};
 };

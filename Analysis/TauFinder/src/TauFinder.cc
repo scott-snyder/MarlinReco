@@ -523,8 +523,6 @@ bool TauFinder::FindTau(std::vector<ReconstructedParticle*> &Qvec,std::vector<Re
       return true;
     }
   
-  double  Etau=tauseed->getEnergy();
- 
   tau.push_back(tauseed);
 
   // just for printing out info
@@ -567,7 +565,6 @@ bool TauFinder::FindTau(std::vector<ReconstructedParticle*> &Qvec,std::vector<Re
 	  tau.push_back(Qvec[s]);
 	  if(_nEvt<coutUpToEv || _nEvt==coutEv)
 	    streamlog_out(DEBUG) << "Adding Q: "<<track->getType()<<"\t"<<track->getEnergy()<<"\t"<<p<<"\t"<<theta<<"\t"<<phi<<std::endl;
-	  Etau+=Qvec[s]->getEnergy();
 	  //combine to new momentum
 	  for(int i=0;i<3;i++){
 	    pvec_tau[i]=pvec_tau[i]+track->getMomentum()[i];
@@ -605,7 +602,6 @@ bool TauFinder::FindTau(std::vector<ReconstructedParticle*> &Qvec,std::vector<Re
                                  <<"\t"<<theta
                                  <<"\t"<<phi<<std::endl;
 
-	  Etau+=Nvec[s]->getEnergy();
 	  //combine to new momentum
 	  for(int i=0;i<3;i++){
 	    pvec_tau[i]=pvec_tau[i]+track->getMomentum()[i];

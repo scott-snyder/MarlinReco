@@ -47,7 +47,6 @@ SLDCorrection::SLDCorrection() :
 	m_nRunSum(0),
 	m_nEvtSum(0),
 	m_Bfield(0.f),
-	foundFlightDirection(true),
 	m_nSLDecayOfBHadron(0),
 	m_nSLDecayOfCHadron(0),
 	m_nSLDecayOfTauLepton(0),
@@ -1265,7 +1264,7 @@ void SLDCorrection::Clear()
 	m_OtherParticle3DImpactParameter.clear();
 }
 
-void SLDCorrection::processRunHeader()
+void SLDCorrection::processRunHeader( LCRunHeader* )
 {
 	m_nRun = 0;
 	m_nEvt = 0;
@@ -3201,7 +3200,6 @@ MCP SLDCorrection::getTrueNeutrino( const MCP &SLDLepton )
 	try
 	{
 		MCP MotherHadron = SLDLepton->getParents()[ 0 ];
-		int nNeutrinos = 0;
 		for ( long unsigned int i_daughter = 0 ; i_daughter < ( MotherHadron->getDaughters() ).size() ; ++i_daughter )
 		{
 			MCP daughter = MotherHadron->getDaughters()[ i_daughter ];
@@ -3214,7 +3212,6 @@ MCP SLDCorrection::getTrueNeutrino( const MCP &SLDLepton )
 				trueNeutrino = daughter;
 			}
 		}
-		++nNeutrinos;
 	}
 	catch(DataNotAvailableException &e)
         {

@@ -197,9 +197,7 @@ private:
   std::vector<float*> _inferObsValues{};
   std::vector<int> _SnB{};
 
-  float _momabs=0, _lambda=0;
-  float _d0=0, _z0=0;
-  float _PDG=0, _nTracks=0;
+  float _momabs=0;
 
   const static int _nReason = 6;
   unsigned int _nRejectedPFOs[_nReason];
