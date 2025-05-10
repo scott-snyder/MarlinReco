@@ -1,12 +1,12 @@
 {
   "version": 5,
-  "prev": "37458db5b36a2f3fa0992a5fa1109f415c3edff7",
+  "prev": "52e05c6e067481a5c077ce60c365893088ecef0f",
   "head": "91e26f1032fb8f4acd09b8ae1fb67460ba69af70",
   "applied": [
     "gitignore",
     "nullptr",
     "utf8",
-    "paran"
+    "paren"
   ],
   "unapplied": [],
   "hidden": [],
@@ -20,7 +20,7 @@
     "utf8": {
       "oid": "5610a568d95cd1e1fa72cad564a407c8fb10de37"
     },
-    "paran": {
+    "paren": {
       "oid": "91e26f1032fb8f4acd09b8ae1fb67460ba69af70"
     }
   }
