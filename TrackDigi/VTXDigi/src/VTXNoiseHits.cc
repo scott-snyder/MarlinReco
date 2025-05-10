@@ -52,7 +52,7 @@ void VTXNoiseHits::init() {
   _nEvt = 0;
 
   // initialize gsl random generator
-  // ranlux algorithm of Lüscher, which produces 'luxury random numbers'
+  // ranlux algorithm of LÃ¼scher, which produces 'luxury random numbers'
   r = gsl_rng_alloc(gsl_rng_ranlxs2);
 
   // FIXME: do we want a seed from a processor parameter ?

@@ -80,7 +80,7 @@ void VTXNoiseClusters::init() {
   _vxdGeo = new VXDGeometry(Global::GEAR);
 
   // initialize gsl random generator
-  // ranlux algorithm of Lüscher, which produces 'luxury random numbers'
+  // ranlux algorithm of LÃ¼scher, which produces 'luxury random numbers'
   _rng = gsl_rng_alloc(gsl_rng_ranlxs2);
 
   gsl_rng_default_seed = _ranSeed;
