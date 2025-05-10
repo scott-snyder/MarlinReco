@@ -65,7 +65,6 @@ using namespace CLHEP ;
 // for silicon.   
 MyG4UniversalFluctuationForSi::MyG4UniversalFluctuationForSi()
  :minNumberInteractionsBohr(10.0),
-  theBohrBeta2(50.0*keV/proton_mass_c2),
   minLoss(0.000001*eV),
   problim(0.01),
   alim(10.),

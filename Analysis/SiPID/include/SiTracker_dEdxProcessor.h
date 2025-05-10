@@ -33,7 +33,8 @@ using namespace marlin ;
 struct dEdxPoint{
 public:
   dEdxPoint(const double _dE, const double _dx);
-  dEdxPoint(const dEdxPoint&);
+  dEdxPoint(const dEdxPoint&) = default;
+  dEdxPoint& operator=(const dEdxPoint&) = default;
 
   double Get_dE() const { return dE; }
   double Get_dx() const { return dx; }
@@ -79,7 +80,7 @@ class SiTracker_dEdxProcessor : public Processor {
   
   // Evaluation methods for dE/dx
   typedef std::vector<dEdxPoint> dEdxVec;
-  static bool dEdxOrder(dEdxPoint p1, dEdxPoint p2) { return p1.Get_dEdx() < p2.Get_dEdx() ; }
+  static bool dEdxOrder(const dEdxPoint& p1, const dEdxPoint& p2) { return p1.Get_dEdx() < p2.Get_dEdx() ; }
   static double truncFractionUp;
   static double truncFractionLo;
   static double dEdxGeneralTruncMean(dEdxVec, double &dEdxError,

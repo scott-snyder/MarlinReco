@@ -862,21 +862,21 @@ void ILDCaloDigi::processEvent( LCEvent * evt ) {
             std::vector<bool> used(n, false) ;
             //for(unsigned int i =0; i<n;i++) used[i] = false;
 
-            int count = 0;
-            float eCellInTime = 0.;
-            float eCellOutput = 0.;
+            //int count = 0;
+            //float eCellInTime = 0.;
+            //float eCellOutput = 0.;
 
             for(unsigned int i =0; i<n;i++){
               float timei   = hit->getTimeCont(i);
               float energyi = hit->getEnergyCont(i);
       	      float energySum = 0;
 
-              float deltat = 0;
-              if(_ecalCorrectTimesForPropagation)deltat=dt;
-              if(timei-deltat > _ecalTimeWindowMin && timei-deltat < ecalTimeWindowMax){
-                float ecor = energyi*calibr_coeff;
-                eCellInTime+=ecor;
-              }
+              //float deltat = 0;
+              //if(_ecalCorrectTimesForPropagation)deltat=dt;
+              //if(timei-deltat > _ecalTimeWindowMin && timei-deltat < ecalTimeWindowMax){
+              //  float ecor = energyi*calibr_coeff;
+              //  eCellInTime+=ecor;
+              //}
 
               if (!used[i]) {
                 // merge with other hits?
@@ -939,7 +939,7 @@ void ILDCaloDigi::processEvent( LCEvent * evt ) {
                   if(_ecalCorrectTimesForPropagation)timeCor=dt;
                   timei = timei - timeCor;
                   if(timei > _ecalTimeWindowMin && timei < ecalTimeWindowMax){
-                    count++;
+                    //count++;
                     CalorimeterHitImpl * calhit = new CalorimeterHitImpl();
                     if(_ecalGapCorrection!=0){
                       _calHitsByStaveLayer[stave][layer].push_back(calhit);
@@ -954,7 +954,7 @@ void ILDCaloDigi::processEvent( LCEvent * evt ) {
                       // calhit->setEnergy(energyi);
                     }
 		    
-                    eCellOutput+= energyi*calibr_coeff;
+                    //eCellOutput+= energyi*calibr_coeff;
 		    
                     calhit->setTime(timei);
                     calhit->setPosition(hit->getPosition());
@@ -1098,7 +1098,7 @@ void ILDCaloDigi::processEvent( LCEvent * evt ) {
 
             std::vector<bool> used(n, false) ;
 
-            int count = 0;
+            //int count = 0;
          
             for(unsigned int i =0; i<n;i++){ // loop over all subhits
               float timei   = hit->getTimeCont(i); //absolute hit timing of current subhit
@@ -1169,7 +1169,7 @@ void ILDCaloDigi::processEvent( LCEvent * evt ) {
                   if(_hcalCorrectTimesForPropagation)timeCor=dt;
                   timei = timei - timeCor;
                   if(timei > _hcalTimeWindowMin && timei < hcalTimeWindowMax){ //if current subhit timecluster is within specified timing window, create new CalorimeterHit and add to collections etc.
-                    count++;
+                    //count++;
                     CalorimeterHitImpl * calhit = new CalorimeterHitImpl();
                     calhit->setCellID0(cellid);
                     calhit->setCellID1(cellid1);
@@ -1736,13 +1736,6 @@ LCCollection* ILDCaloDigi::combineVirtualStripCells(LCCollection* col, bool isBa
   // loop over input collection
   int numElements = col->getNumberOfElements();
 
-  // // sum energy for check
-  float tempenergysum(0);
-  for (int j(0); j < numElements; ++j) {
-    SimCalorimeterHit * hit = dynamic_cast<SimCalorimeterHit*>( col->getElementAt( j ) ) ;
-    tempenergysum+=hit->getEnergy();
-  }
-
   float scTVirtLengthBar(-99);
   float scLVirtLengthBar(-99);
   float scTVirtLengthEnd(-99);
@@ -1871,12 +1864,10 @@ LCCollection* ILDCaloDigi::combineVirtualStripCells(LCCollection* col, bool isBa
 
     // effect of absorbtion length within scintillator
     //     TODO: should check the polarity is consistent with mppc position, to make sure larger response nearer to mppc....
-    float energy_new = hit->getEnergy();
 
     float energyNonuniformityScaling(1.);
     if (_strip_abs_length>0) {
       energyNonuniformityScaling = exp ( -relativePos/_strip_abs_length );
-      energy_new *= energyNonuniformityScaling;
     }
 
 
@@ -1995,19 +1986,13 @@ LCCollection* ILDCaloDigi::combineVirtualStripCells(LCCollection* col, bool isBa
     }
 
     // add the MC contriutions
-    float eadd(0);
     for (int ij=0; ij<hit->getNMCContributions() ; ij++) {
       newhit->addMCParticleContribution( hit->getParticleCont(ij),
                                          hit->getEnergyCont(ij)*energyNonuniformityScaling,
                                          hit->getTimeCont(ij),
                                          hit->getPDGCont(ij) );
-      eadd+=hit->getEnergyCont(ij)*energyNonuniformityScaling;
     }
 
-    float esum(0);
-    for (int ij=0; ij<newhit->getNMCContributions() ; ij++) {
-      esum+=newhit->getEnergyCont(ij);
-    }
   } // loop over hits
 
   // move the hits from the temporary storage to the output collection

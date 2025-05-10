@@ -1,9 +1,13 @@
 // Boost Graph Library
 #include <boost/graph/adjacency_list.hpp>
+#if __GNUC__ >= 12
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
+#endif
 #include <boost/graph/max_cardinality_matching.hpp>
+#if __GNUC__ >= 12
 #pragma GCC diagnostic pop
+#endif
 
 #include "marlin/Processor.h"
 #include "EVENT/ReconstructedParticle.h"

@@ -33,9 +33,6 @@
 dEdxPoint::dEdxPoint(const double _dE, const double _dx) :
     dE(_dE), dx(_dx), dEdx(_dE/_dx) {}
 
-dEdxPoint::dEdxPoint(const dEdxPoint& orig) :
-    dE(orig.Get_dE()), dx(orig.Get_dx()), dEdx(orig.Get_dE()/orig.Get_dx()) {}
-
 SiTracker_dEdxProcessor aSiTracker_dEdxProcessor ;
 
 
@@ -75,11 +72,6 @@ SiTracker_dEdxProcessor::SiTracker_dEdxProcessor() : Processor("SiTracker_dEdxPr
                              "Tracker hit collections that will be analysed",
                              m_trkHitCollNames ,
                              defaultTrkHitCollections ) ;
-
-  int elementMask = 0;
-  for (unsigned ibit=0; ibit<sizeof(int)*CHAR_BIT; ibit++) {
-    elementMask += 1 << ibit;
-  }
 
   registerProcessorParameter("CheatSensorThicknesses" ,
                              "Shall we use the sensitive thicknesses from parameters?",
