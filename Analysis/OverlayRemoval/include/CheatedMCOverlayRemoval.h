@@ -29,7 +29,7 @@ class CheatedMCOverlayRemoval : public Processor
 {
 	public:
 
-		virtual Processor*  newProcessor()
+		virtual Processor*  newProcessor() override
 		{
 			return new CheatedMCOverlayRemoval;
 		}
@@ -37,17 +37,17 @@ class CheatedMCOverlayRemoval : public Processor
 		virtual ~CheatedMCOverlayRemoval() = default;
 		CheatedMCOverlayRemoval(const CheatedMCOverlayRemoval&) = delete;
 		CheatedMCOverlayRemoval& operator=(const CheatedMCOverlayRemoval&) = delete;
-		virtual void init();
-		virtual void processRunHeader();
-		virtual void processEvent( EVENT::LCEvent *pLCEvent );
-		virtual void check();
+		virtual void init() override;
+		virtual void processRunHeader(LCRunHeader*) override;
+		virtual void processEvent( EVENT::LCEvent *pLCEvent )override;
+		virtual void check( LCEvent* ) override;
 		EVENT::MCParticle* getLinkedMCP(EVENT::ReconstructedParticle *recoParticle, 
 						const LCRelationNavigator& RecoMCParticleNav, const LCRelationNavigator& MCParticleRecoNav, 
 						float &weightPFOtoMCP, float &weightMCPtoPFO);
 		EVENT::ReconstructedParticle* getLinkedPFO(EVENT::MCParticle *mcParticle, 
 							   const LCRelationNavigator& RecoMCParticleNav, const LCRelationNavigator& MCParticleRecoNav, 
 							   float &weightPFOtoMCP, float &weightMCPtoPFO);
-		virtual void end();
+		virtual void end() override;
 		void Clear();
 
 	private:

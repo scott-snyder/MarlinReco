@@ -136,11 +136,9 @@ bool GammaGammaCandidateFinder::FindPFOs( LCEvent* evt ) {
 
   // clear old vector
   _pfovec.clear();
-  typedef const std::vector<std::string> StringVec ;
-  StringVec* strVec = evt->getCollectionNames() ;
-  for(StringVec::const_iterator name=strVec->begin(); name!=strVec->end(); name++){    
-    if(*name==_inputParticleCollectionName){
-      LCCollection* col = evt->getCollection(*name);
+  for(const std::string& name : *evt->getCollectionNames()) {
+    if(name==_inputParticleCollectionName){
+      LCCollection* col = evt->getCollection(name);
       unsigned int nelem = col->getNumberOfElements();
       tf = true;
       for(unsigned int i=0;i<nelem;i++){

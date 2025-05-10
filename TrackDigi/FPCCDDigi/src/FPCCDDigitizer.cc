@@ -287,8 +287,6 @@ void FPCCDDigitizer::makePixelHits(SimTrackerHitImpl *SimTHit,  FPCCDData &hitVe
   gear::Vector3D* HitPosInMokka = new gear::Vector3D(SimTHit->getPosition()[0],SimTHit->getPosition()[1],SimTHit->getPosition()[2]);
   /************get basic info.**************/
   const gear::BField& gearBField = Global::GEAR->getBField();
-  double posphi = HitPosInMokka->phi();
-  if(HitPosInMokka->y()<0) posphi += 2*M_PI;
   int layer = 0 ; int ladderID = 0 ;
   const int cellId = SimTHit->getCellID0();
 
@@ -305,8 +303,6 @@ void FPCCDDigitizer::makePixelHits(SimTrackerHitImpl *SimTHit,  FPCCDData &hitVe
   _pixelSize = _pixelSizeVec[layer]; 
   /*********** get hit dir(mom) at hit points and other info.****************/
   gear::Vector3D* MomAtHitPos = new gear::Vector3D(SimTHit->getMomentum()[0],SimTHit->getMomentum()[1],SimTHit->getMomentum()[2]);
-  double momphi = MomAtHitPos->phi();
-  if(MomAtHitPos->y()<0) momphi += 2*M_PI;
   gear::Vector3D origin;
   gear::Vector3D bfield = gearBField.at(origin);
   gear::Vector3D* BField = new gear::Vector3D(bfield.x(),bfield.y(),bfield.z());
