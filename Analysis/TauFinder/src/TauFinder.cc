@@ -456,8 +456,6 @@ bool TauFinder::FindTau(std::vector<ReconstructedParticle*>& Qvec, std::vector<R
     return true;
   }
 
-  double Etau = tauseed->getEnergy();
-
   tau.push_back(tauseed);
 
   // just for printing out info
