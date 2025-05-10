@@ -1139,7 +1139,7 @@ void SLDCorrection::Clear() {
   m_OtherParticle3DImpactParameter.clear();
 }
 
-void SLDCorrection::processRunHeader() {
+void SLDCorrection::processRunHeader(lcio::LCRunHeader*) {
   m_nRun = 0;
   m_nEvt = 0;
   ++m_nRunSum;
