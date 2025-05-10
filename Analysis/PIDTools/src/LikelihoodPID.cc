@@ -890,7 +890,6 @@ int LikelihoodPID::Class_hadron(TLorentzVector pp, EVENT::Track* trk, EVENT::Clu
     for (unsigned int i = 0; i < cluvec.size(); i++) {
       ecal += cluvec[i]->getSubdetectorEnergies()[0];
       hcal += cluvec[i]->getSubdetectorEnergies()[1];
-      mucal += cluvec[i]->getSubdetectorEnergies()[2];
     }
   }
 
