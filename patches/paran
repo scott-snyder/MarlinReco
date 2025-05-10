@@ -1,0 +1,8 @@
+Bottom: e8ab38d9fb0c75ddaf8ff1885ff4a0032b2abdc4
+Top:    e8ab38d9fb0c75ddaf8ff1885ff4a0032b2abdc4
+Author: sss <sss@karma>
+Date:   2025-05-10 12:57:31 -0400
+
+Fix expression parenthesizing.
+
+Apparent typo.  Fixes a clang warning.
