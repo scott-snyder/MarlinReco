@@ -14,13 +14,13 @@ public:
   ComputeShowerShapesProcessor(const ComputeShowerShapesProcessor&) = delete;
   ComputeShowerShapesProcessor& operator=(const ComputeShowerShapesProcessor&) = delete;
 
-  virtual Processor* newProcessor() { return new ComputeShowerShapesProcessor; }
+  virtual Processor* newProcessor() override { return new ComputeShowerShapesProcessor; }
   ComputeShowerShapesProcessor();
-  virtual void init(LCEvent* evt);
-  virtual void processRunHeader(LCRunHeader* run);
-  virtual void processEvent(LCEvent* evt);
-  virtual void check(LCEvent* evt);
-  virtual void end();
+  virtual void init() override;
+  virtual void processRunHeader(LCRunHeader* run) override;
+  virtual void processEvent(LCEvent* evt) override;
+  virtual void check(LCEvent* evt) override;
+  virtual void end() override;
 
 private:
   ClusterShapes* pClusterShapes{};
