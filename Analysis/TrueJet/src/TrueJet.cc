@@ -346,7 +346,7 @@ void TrueJet::processEvent( LCEvent * event ) {
 
       streamlog_out(DEBUG8) << "  Number of jets found : " << njet << std::endl;
 
-      double tmomS[25][3]={0.} ;
+      double tmomS[25][3]={{0.}} ;
       double tES[25]={0.};
       int pid_type[25]={0} ;
       for ( int i_jet=1; i_jet<=njet ; i_jet++ ) { // jet-loop
@@ -1430,7 +1430,7 @@ void TrueJet::getPyjets(LCCollection* mcpcol )
        //
 
       int mothers[10] ={0};
-      int daughters[10][10] ={0};
+      int daughters[10][10] ={{0}};
 
       int line94 = i_py ;
       if ( _whiz1 ) { stdhep_reader_bug_workaround(line94) ; }

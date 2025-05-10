@@ -175,15 +175,13 @@ bool GammaGammaSolutionFinder::FindPFOs( LCEvent* evt ) {
 
   // clear old vector
   _pfovec.clear();
-  typedef const std::vector<std::string> StringVec ;
-  StringVec* strVec = evt->getCollectionNames() ;
 
 
 // All GammaGammaCandidates
-  for(StringVec::const_iterator name=strVec->begin(); name!=strVec->end(); name++){
+  for (const std::string& name : *evt->getCollectionNames()) {
      for (unsigned int j=0; j < _gammagammaCandidateCollections.size(); ++j) {    
-        if(*name==_gammagammaCandidateCollections[j]){
-           LCCollection* col = evt->getCollection(*name);
+        if(name==_gammagammaCandidateCollections[j]){
+           LCCollection* col = evt->getCollection(name);
            unsigned int nelem = col->getNumberOfElements();
            tf = true;
            for(unsigned int i=0;i<nelem;i++){
@@ -248,7 +246,7 @@ unsigned int GammaGammaSolutionFinder::CountIndependentPhotons() {
   // For convenience sort the GammaGammaCandidates by fit probability
   std::sort(_pfovec.begin(),_pfovec.end(),GammaGammaSolutionFinder::PfoProbabilitySortFunction);
 
-  int k=-1;
+  //int k=-1;
 
   for(unsigned int i = 0; i < _pfovec.size(); i++){
       const ReconstructedParticleVec particles = _pfovec[i]->getParticles();
@@ -259,7 +257,7 @@ unsigned int GammaGammaSolutionFinder::CountIndependentPhotons() {
 //          std::cout << "GWWWW " << i << " " << j << " " << particle << std::endl;
           if( daughter_particles.find(particle) == daughter_particles.end() ){
               daughter_particles.insert(particle);                              // Add particle to the set
-              k++;                                                              // Increment photon index
+              //k++;                                                              // Increment photon index
               //std::cout << i << " " << k << std::endl;
           }
       }       

@@ -109,13 +109,11 @@ bool DistilledPFOCreator::FindPFOs( LCEvent* evt ) {
   _pfovec.clear();
   _ggpfovec.clear();
   _mypfovec.clear();
-  typedef const std::vector<std::string> StringVec ;
-  StringVec* strVec = evt->getCollectionNames() ;
 
 // PandoraPFOs
-  for(StringVec::const_iterator name=strVec->begin(); name!=strVec->end(); name++){    
-    if(*name==_inputParticleCollectionName1){
-      LCCollection* col = evt->getCollection(*name);
+  for(const std::string& name : *evt->getCollectionNames()) {
+    if(name==_inputParticleCollectionName1){
+      LCCollection* col = evt->getCollection(name);
       unsigned int nelem = col->getNumberOfElements();
       tf = true;
       for(unsigned int i=0;i<nelem;i++){
@@ -127,9 +125,9 @@ bool DistilledPFOCreator::FindPFOs( LCEvent* evt ) {
   if(_printing>1)std::cout << "FindPFOs : (nPFOs (PandoraPFOs) = " << _pfovec.size() << " )" << std::endl; 
 
 // GammaGammaParticles
-  for(StringVec::const_iterator name=strVec->begin(); name!=strVec->end(); name++){    
-    if(*name==_inputParticleCollectionName2){
-      LCCollection* col = evt->getCollection(*name);
+  for(const std::string& name : *evt->getCollectionNames()) {
+    if(name==_inputParticleCollectionName2){
+      LCCollection* col = evt->getCollection(name);
       unsigned int nelem = col->getNumberOfElements();
       tf = true;
       for(unsigned int i=0;i<nelem;i++){
