@@ -1,0 +1,14 @@
+Bottom: 59b438d95b3d9717b17ac4c5926fa702c75751e4
+Top:    59b438d95b3d9717b17ac4c5926fa702c75751e4
+Author: sss <sss@karma>
+Date:   2025-05-10 12:58:02 -0400
+
+Fix clang warnings.
+
+ - Avoid shadowed typedef; use range-for.
+ - Unused variables/class members.
+ - Protect gcc-specific pragmas.
+ - Missing/extra arguments from  overriding virtual functions.
+ - Can't default an assignment op if it's deleted in the base class.
+ - Fix use of braces in nested array initializers.
+ - Use C++-style struct declaration, rather than a typedef.
