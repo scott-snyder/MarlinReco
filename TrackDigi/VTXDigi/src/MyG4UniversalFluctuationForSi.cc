@@ -62,8 +62,13 @@ using namespace CLHEP;
 // The constructor setups various constants pluc eloss parameters
 // for silicon.
 MyG4UniversalFluctuationForSi::MyG4UniversalFluctuationForSi()
-    : minNumberInteractionsBohr(10.0), theBohrBeta2(50.0 * keV / proton_mass_c2), minLoss(0.000001 * eV), problim(0.01),
-      alim(10.), nmaxCont1(4), nmaxCont2(16) {
+ :minNumberInteractionsBohr(10.0),
+  minLoss(0.000001*eV),
+  problim(0.01),
+  alim(10.),
+  nmaxCont1(4),
+  nmaxCont2(16)
+{
   sumalim = -log(problim);
 
   chargeSquare = 1.; // Assume all particles have charge 1

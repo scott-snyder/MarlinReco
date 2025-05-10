@@ -44,10 +44,9 @@ ComputeShowerShapesProcessor::ComputeShowerShapesProcessor() : Processor("Comput
   registerProcessorParameter("MoliereRadius_Hcal", "Moliere radius of Absorbers", _Rm2, float(17.19));
 }
 
-void ComputeShowerShapesProcessor::init(LCEvent* evt) {
+void ComputeShowerShapesProcessor::init() {
   streamlog_out(DEBUG) << "   init called  " << std::endl;
 
-  _PFOCol = evt->getCollection(_ClusterCollection);
   //_myShowerShapes = new ComputeShowerShapes();
   // define variable names
   std::vector<std::string> ClusterShapeNames;
@@ -72,8 +71,6 @@ void ComputeShowerShapesProcessor::init(LCEvent* evt) {
   ClusterShapeNames.push_back("meanOf_hitradius");
   ClusterShapeNames.push_back("rmsOf_hitradius");
   // ClusterShapeNames.push_back("Eclus_over_Ptrue");
-
-  _PFOCol->parameters().setValues("ClusterShapeParameters", ClusterShapeNames);
 
   printParameters();
 }

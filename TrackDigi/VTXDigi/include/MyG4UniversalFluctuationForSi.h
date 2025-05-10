@@ -94,7 +94,6 @@ private:
   double e0{};
 
   double minNumberInteractionsBohr{};
-  double theBohrBeta2{};
   double minLoss{};
   double problim{};
   double sumalim{};

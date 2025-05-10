@@ -107,7 +107,7 @@ private:
 class MVAPIDHypothesis : public PIDParticle_base {
 public:
   MVAPIDHypothesis(const MVAPIDHypothesis&) = default;
-  MVAPIDHypothesis& operator=(const MVAPIDHypothesis&) = default;
+  MVAPIDHypothesis& operator=(const MVAPIDHypothesis&) = delete;
 
   MVAPIDHypothesis(const char* name, int _pdg, double _mass, const double* BBpars, const float mvaCut = 0.)
       : PIDParticle_base(name, _pdg, _mass, BBpars), _mva(0), _q(0), _sigAbove(0), _mvaCut(mvaCut),
