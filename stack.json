@@ -1,14 +1,15 @@
 {
   "version": 5,
-  "prev": "6f6a0d57d7974ebe3344717395142c6d7b6a5012",
-  "head": "9473e42b6a9678292b744fd2c0f3afad92dc9911",
+  "prev": "e176c45aaefb246ca34c272d5c83bef4c8d1942b",
+  "head": "5610a568d95cd1e1fa72cad564a407c8fb10de37",
   "applied": [
     "gitignore",
     "nullptr",
-    "utf8",
+    "utf8"
+  ],
+  "unapplied": [
     "clang"
   ],
-  "unapplied": [],
   "hidden": [],
   "patches": {
     "gitignore": {
