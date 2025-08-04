@@ -82,7 +82,7 @@ IF(CLANG_TIDY AND CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
             COMMENT "Checking for problems in source files"
         )
     ELSE()
-        MESSAGE(WARNING "run-clang-tidy.py not found on system, skip creating lint target!")
+        #MESSAGE(WARNING "run-clang-tidy.py not found on system, skip creating lint target!")
     ENDIF()
 ELSE()
     IF(NOT CLANG_TIDY)
