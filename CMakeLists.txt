@@ -4,6 +4,9 @@
 CMAKE_MINIMUM_REQUIRED( VERSION 3.12 FATAL_ERROR )
 ########################################################
 
+cmake_policy(SET CMP0144 NEW)
+cmake_policy(SET CMP0167 NEW)
+
 # fix for lcio: all c++ sources need to be compiled with -Wno-long-long
 SET( ENV{CXXFLAGS} "-Wno-long-long $ENV{CXXFLAGS}" )
 
