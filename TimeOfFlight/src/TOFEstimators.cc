@@ -14,6 +14,7 @@
 #include "EVENT/SimTrackerHit.h"
 #include "CLHEP/Random/Randomize.h"
 
+using namespace lcio;
 using namespace TOFUtils;
 using std::vector;
 using std::string;

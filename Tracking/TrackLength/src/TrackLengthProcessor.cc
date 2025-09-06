@@ -12,6 +12,7 @@
 #include "EVENT/SimTrackerHit.h"
 #include "UTIL/TrackTools.h"
 
+using namespace lcio;
 using namespace TrackLengthUtils;
 using std::vector;
 using std::string;

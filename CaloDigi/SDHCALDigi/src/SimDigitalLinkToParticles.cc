@@ -9,6 +9,8 @@
 
 #include <cassert>
 
+using namespace lcio;
+
 SimDigitalLinkToParticles aSimDigitalLinkToParticles ;
 
 SimDigitalLinkToParticles::SimDigitalLinkToParticles()
