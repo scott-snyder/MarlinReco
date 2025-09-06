@@ -12,6 +12,7 @@
 #include "marlin/VerbosityLevels.h"
 #include "marlinutil/GeometryUtil.h"
 
+using namespace lcio;
 using namespace TrackLengthUtils;
 using dd4hep::rec::Vector3D;
 using EVENT::LCCollection;
