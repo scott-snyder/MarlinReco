@@ -34,60 +34,60 @@ public:
   IsolatedLeptonFinderProcessor& operator=(const IsolatedLeptonFinderProcessor&) = delete;
 
   virtual void init();
-  virtual void processEvent(LCEvent* evt);
+  virtual void processEvent(lcio::LCEvent* evt);
   virtual void end();
 
 protected:
   /** Returns true if pfo is a lepton */
-  bool IsGoodLepton(ReconstructedParticle* pfo);
+  bool IsGoodLepton(lcio::ReconstructedParticle* pfo);
 
   /** Returns true if pfo is an isolated lepton */
-  bool IsIsolatedLepton(ReconstructedParticle* pfo);
+  bool IsIsolatedLepton(lcio::ReconstructedParticle* pfo);
 
   /** Returns true if isolated, as defined by the cone energy */
-  bool IsIsolatedRectangular(ReconstructedParticle* pfo);
-  bool IsIsolatedPolynomial(ReconstructedParticle* pfo);
-  bool IsIsolatedJet(ReconstructedParticle* pfo);
+  bool IsIsolatedRectangular(lcio::ReconstructedParticle* pfo);
+  bool IsIsolatedPolynomial(lcio::ReconstructedParticle* pfo);
+  bool IsIsolatedJet(lcio::ReconstructedParticle* pfo);
 
   /** Returns true if charged */
-  bool IsCharged(ReconstructedParticle* pfo);
+  bool IsCharged(lcio::ReconstructedParticle* pfo);
 
   /** Returns true if it passes muon or electron ID cuts */
-  bool IsLepton(ReconstructedParticle* pfo);
+  bool IsLepton(lcio::ReconstructedParticle* pfo);
 
   /** Returns true if it passes electron ID cuts */
-  bool IsElectron(ReconstructedParticle* pfo);
+  bool IsElectron(lcio::ReconstructedParticle* pfo);
 
   /** Returns true if it passes muon ID cuts */
-  bool IsMuon(ReconstructedParticle* pfo);
+  bool IsMuon(lcio::ReconstructedParticle* pfo);
 
   /** Returns true if it passes photon ID cuts */
-  bool IsPhoton(ReconstructedParticle* pfo);
+  bool IsPhoton(lcio::ReconstructedParticle* pfo);
 
   /** Returns true if it passes impact parameter cuts */
-  bool PassesImpactParameterCuts(ReconstructedParticle* pfo);
+  bool PassesImpactParameterCuts(lcio::ReconstructedParticle* pfo);
 
   /** Returns true if it passes impact parameter significance cuts */
-  bool PassesImpactParameterSignificanceCuts(ReconstructedParticle* pfo);
+  bool PassesImpactParameterSignificanceCuts(lcio::ReconstructedParticle* pfo);
 
   /** Helper function to order PFOS by energy */
   bool isMoreEnergetic(int i, int j) {
-    ReconstructedParticle* pfo_i = static_cast<ReconstructedParticle*>(_pfoCol->getElementAt(i));
-    ReconstructedParticle* pfo_j = static_cast<ReconstructedParticle*>(_pfoCol->getElementAt(j));
+    lcio::ReconstructedParticle* pfo_i = static_cast<lcio::ReconstructedParticle*>(_pfoCol->getElementAt(i));
+    lcio::ReconstructedParticle* pfo_j = static_cast<lcio::ReconstructedParticle*>(_pfoCol->getElementAt(j));
     return (pfo_i->getEnergy() > pfo_j->getEnergy());
   }
 
   /** Adds photons around lepton to four vector */
-  void dressLepton(ReconstructedParticleImpl* pfo, int PFO_idx);
+  void dressLepton(lcio::ReconstructedParticleImpl* pfo, int PFO_idx);
 
   /** Calculates the cone energy */
-  float getConeEnergy(ReconstructedParticle* pfo);
+  float getConeEnergy(lcio::ReconstructedParticle* pfo);
 
   /** [0]:Ecal energy, [1]:Hcal energy */
-  void getCalEnergy(ReconstructedParticle* pfo, float* cale);
+  void getCalEnergy(lcio::ReconstructedParticle* pfo, float* cale);
 
   /** Replace missing copy constructor by hand */
-  ReconstructedParticleImpl* CopyReconstructedParticle(ReconstructedParticle* pfo);
+  lcio::ReconstructedParticleImpl* CopyReconstructedParticle(lcio::ReconstructedParticle* pfo);
 
   /** Input collection */
   std::string _inputPFOsCollection{};
@@ -104,9 +104,9 @@ protected:
   /** Output collection of dressed isolated leptons */
   std::string _outputDressedIsoLepCollection{};
 
-  LCCollection* _pfoCol = nullptr;
+  lcio::LCCollection* _pfoCol = nullptr;
   float _cosConeAngle = 0;
-  std::vector<ReconstructedParticle*> _workingList = {};
+  std::vector<lcio::ReconstructedParticle*> _workingList = {};
 
   /** If set to true, uses PID cuts */
   bool _usePID = false;
@@ -153,7 +153,7 @@ protected:
   /** If set to true, uses jet-based isolation (LAL algorithm) */
   bool _useJetIsolation = false;
   std::string _jetCollectionName{};
-  std::map<ReconstructedParticle*, ReconstructedParticle*> _rpJetMap{};
+  std::map<lcio::ReconstructedParticle*, lcio::ReconstructedParticle*> _rpJetMap{};
   float _jetIsoVetoMinXt = 0;
   float _jetIsoVetoMaxXt = 0;
   float _jetIsoVetoMinZ = 0;
