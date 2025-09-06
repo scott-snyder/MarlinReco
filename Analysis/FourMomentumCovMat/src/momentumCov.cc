@@ -17,6 +17,8 @@
 
 #include "momentumCov.h"
 
+using namespace lcio;
+
 MomentumCov aMomentumCov ;
 
 

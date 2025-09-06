@@ -27,14 +27,14 @@ class IsolatedLeptonTaggingProcessor : public marlin::Processor {
   
   /** Called for every run.
    */
-  virtual void processRunHeader( LCRunHeader* run ) ;
+  virtual void processRunHeader( lcio::LCRunHeader* run ) ;
   
   /** Called for every event - the working horse.
    */
-  virtual void processEvent( LCEvent * evt ) ; 
+  virtual void processEvent( lcio::LCEvent * evt ) ; 
   
   
-  virtual void check( LCEvent * evt ) ; 
+  virtual void check( lcio::LCEvent * evt ) ; 
   
   
   /** Called after data processing for clean up.
@@ -47,7 +47,7 @@ class IsolatedLeptonTaggingProcessor : public marlin::Processor {
   /**
    * Add the expected output collections
    */
-  virtual void addOutputColls(LCEvent* evt, LCCollection* pfosWithoutIsoLepColl, LCCollection* isoLepColl);
+  virtual void addOutputColls(lcio::LCEvent* evt, lcio::LCCollection* pfosWithoutIsoLepColl, lcio::LCCollection* isoLepColl);
 
   /** Input collection name.
    */

@@ -83,7 +83,7 @@ class FPCCDDigitizer : public marlin::Processor, public marlin::EventModifier {
 
   virtual const std::string & name() const { return Processor::name() ; }
   
-  virtual void modifyEvent( LCEvent * evt ) ; 
+  virtual void modifyEvent( lcio::LCEvent * evt ) ; 
 
   
   /** Called at the begin of the job before anything is read.
@@ -93,13 +93,13 @@ class FPCCDDigitizer : public marlin::Processor, public marlin::EventModifier {
   
   /** Called for every run.
    */
-  virtual void processRunHeader( LCRunHeader* run ) ;
+  virtual void processRunHeader( lcio::LCRunHeader* run ) ;
   
   /** Called for every event - the working horse.
    */
-  //  virtual void processEvent( LCEvent * evt ) ;
+  //  virtual void processEvent( lcio::LCEvent * evt ) ;
   
-  virtual void check( LCEvent * evt ) ;   
+  virtual void check( lcio::LCEvent * evt ) ;   
   
   /** Called after data processing for clean up.
    */
@@ -130,7 +130,7 @@ class FPCCDDigitizer : public marlin::Processor, public marlin::EventModifier {
 
   std::string _colNameVTX{};
   std::string _outColNameVTX{};
-  LCCollection* col{};
+  lcio::LCCollection* col{};
   
   int _nRun{};
   int _nEvt{};
@@ -147,8 +147,8 @@ class FPCCDDigitizer : public marlin::Processor, public marlin::EventModifier {
   bool _ladder_Number_encoded_in_cellID{};
   bool _EL_almostOFF{};
   float _pixelSize{};
-  FloatVec _pixelSizeVec{};
-  IntVec _escapedEvtVec{};
+  lcio::FloatVec _pixelSizeVec{};
+  lcio::IntVec _escapedEvtVec{};
   int _esc_count{};
   float _pixelheight{};
   
