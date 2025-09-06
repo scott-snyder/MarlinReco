@@ -32,7 +32,7 @@ class G2CD  : public marlin::Processor
 
 	void init();
 
-	void processEvent( LCEvent * evtP );
+	void processEvent( lcio::LCEvent * evtP );
 
 	void end();
 
