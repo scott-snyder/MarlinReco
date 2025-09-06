@@ -29,7 +29,7 @@ ComputeShowerShapesProcessor::ComputeShowerShapesProcessor() : Processor("Comput
 
   // Processor description
   _description = "Cluster Shower Profile extraction using Fitting";
-  registerInputCollection(LCIO::RECONSTRUCTEDPARTICLE, "PFOCollection", "PFO collection name", _PfoCollection,
+  registerInputCollection(EVENT::LCIO::RECONSTRUCTEDPARTICLE, "PFOCollection", "PFO collection name", _PfoCollection,
                           std::string("PandoraPFOs"));
 
   registerProcessorParameter("ClusterCollectionName", "Cluster collection name", _ClusterCollection,
