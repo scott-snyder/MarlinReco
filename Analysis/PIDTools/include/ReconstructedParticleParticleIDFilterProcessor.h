@@ -15,7 +15,7 @@ public:
   ReconstructedParticleParticleIDFilterProcessor& operator=(const ReconstructedParticleParticleIDFilterProcessor&) = delete;
   ~ReconstructedParticleParticleIDFilterProcessor()                                                                = default;
 
-  void processEvent(LCEvent* event) override;
+  void processEvent(lcio::LCEvent* event) override;
 
 private:
   std::string              m_inputCollName{};

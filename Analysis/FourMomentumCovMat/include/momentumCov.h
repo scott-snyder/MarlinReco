@@ -64,8 +64,8 @@ class MomentumCov : public marlin::Processor {
    */
   virtual void end() ;
 
-  void copy_reconstructedParticle(ReconstructedParticle const *,
-                                  ReconstructedParticleImpl *);
+  void copy_reconstructedParticle(lcio::ReconstructedParticle const *,
+                                  lcio::ReconstructedParticleImpl *);
 
 
  protected:

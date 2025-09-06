@@ -12,12 +12,12 @@ class SimDigitalLinkToParticles : public marlin::Processor
 		virtual marlin::Processor* newProcessor() { return new SimDigitalLinkToParticles ; }
 		SimDigitalLinkToParticles() ;
 
-		virtual void processEvent( LCEvent * evt ) ;
+		virtual void processEvent( lcio::LCEvent * evt ) ;
 
 	protected :
 		virtual void init() ;
 
-		LCCollectionVec* processCollection(LCCollection* inputCol , LCCollection* inputRelCol) ;
+		lcio::LCCollectionVec* processCollection(lcio::LCCollection* inputCol , lcio::LCCollection* inputRelCol) ;
 
 		std::vector<std::string> _inputCollections{}; // input CalorimeterHit collection
 		std::vector<std::string> _inputRelCollections{}; // input CalorimeterHit to SimCalorimeterHit relation collection
