@@ -14,6 +14,7 @@
 #include "marlin/VerbosityLevels.h"
 #include "marlinutil/GeometryUtil.h"
 
+using namespace lcio;
 using namespace TOFUtils;
 using CLHEP::RandGauss;
 using dd4hep::rec::Vector3D;

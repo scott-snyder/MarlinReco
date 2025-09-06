@@ -46,7 +46,7 @@ struct PotentialSameTrackID {
 
 class SimDigitalGeomCellId {
 public:
-  SimDigitalGeomCellId(LCCollection* inputCol, LCCollectionVec* outputCol);
+  SimDigitalGeomCellId(lcio::LCCollection* inputCol, lcio::LCCollectionVec* outputCol);
   virtual ~SimDigitalGeomCellId();
 
   void setCellSize(float size) { _cellSize = size; }
@@ -54,16 +54,16 @@ public:
   virtual float getCellSize() = 0;
   virtual void setLayerLayout(CHT::Layout layout) = 0;
 
-  std::vector<StepAndCharge> decode(SimCalorimeterHit* hit, bool link);
+  std::vector<StepAndCharge> decode(lcio::SimCalorimeterHit* hit, bool link);
 
 protected:
-  virtual void processGeometry(SimCalorimeterHit* hit) = 0;
-  void createStepAndChargeVec(SimCalorimeterHit* hit, std::vector<StepAndCharge>& vec, bool link);
+  virtual void processGeometry(lcio::SimCalorimeterHit* hit) = 0;
+  void createStepAndChargeVec(lcio::SimCalorimeterHit* hit, std::vector<StepAndCharge>& vec, bool link);
 
   void linkSteps(std::vector<StepAndCharge>& vec);
 
 public:
-  virtual std::unique_ptr<CalorimeterHitImpl> encode(int delta_I, int delta_J) = 0;
+  virtual std::unique_ptr<lcio::CalorimeterHitImpl> encode(int delta_I, int delta_J) = 0;
 
   int I() const { return _Iy; }
   int J() const { return _Jz; }
@@ -83,8 +83,8 @@ protected:
   CHT::Layout _currentHCALCollectionCaloLayout = CHT::any;
 
   dd4hep::CellID _cellIDvalue = 0;
-  CellIDDecoder<SimCalorimeterHit> _decoder;
-  CellIDEncoder<CalorimeterHitImpl> _encoder;
+  UTIL::CellIDDecoder<lcio::SimCalorimeterHit> _decoder;
+  UTIL::CellIDEncoder<lcio::CalorimeterHitImpl> _encoder;
 
   float _cellSize = 0.0f;
 
@@ -109,7 +109,7 @@ public:
 
 protected:
   void fillDebugTupleGeometryHit();
-  void fillDebugTupleGeometryStep(SimCalorimeterHit* hit, const std::vector<StepAndCharge>& stepsInIJZcoord);
+  void fillDebugTupleGeometryStep(lcio::SimCalorimeterHit* hit, const std::vector<StepAndCharge>& stepsInIJZcoord);
 
   static AIDA::ITuple* _tupleHit;
   enum {
@@ -153,19 +153,19 @@ protected:
 
 class SimDigitalGeomCellIdLCGEO : public SimDigitalGeomCellId {
 public:
-  SimDigitalGeomCellIdLCGEO(LCCollection* inputCol, LCCollectionVec* outputCol);
+  SimDigitalGeomCellIdLCGEO(lcio::LCCollection* inputCol, lcio::LCCollectionVec* outputCol);
   virtual ~SimDigitalGeomCellIdLCGEO();
 
   virtual float getCellSize();
   virtual void setLayerLayout(CHT::Layout layout);
 
-  virtual std::unique_ptr<CalorimeterHitImpl> encode(int delta_I, int delta_J);
+  virtual std::unique_ptr<lcio::CalorimeterHitImpl> encode(int delta_I, int delta_J);
 
   SimDigitalGeomCellIdLCGEO(const SimDigitalGeomCellIdLCGEO& toCopy) = delete;
   void operator=(const SimDigitalGeomCellIdLCGEO& toCopy) = delete;
 
 protected:
-  virtual void processGeometry(SimCalorimeterHit* hit);
+  virtual void processGeometry(lcio::SimCalorimeterHit* hit);
 
   std::vector<std::string> _encodingString = {"layer", "stave", "module", "tower", "x", "y"};
 
@@ -174,20 +174,20 @@ protected:
 
 class SimDigitalGeomCellIdPROTO : public SimDigitalGeomCellId {
 public:
-  SimDigitalGeomCellIdPROTO(LCCollection* inputCol, LCCollectionVec* outputCol);
+  SimDigitalGeomCellIdPROTO(lcio::LCCollection* inputCol, lcio::LCCollectionVec* outputCol);
   virtual ~SimDigitalGeomCellIdPROTO();
 
   void setCellSize(float size) { _cellSize = size; }
   virtual float getCellSize() { return _cellSize; }
   virtual void setLayerLayout(CHT::Layout layout);
 
-  virtual std::unique_ptr<CalorimeterHitImpl> encode(int delta_I, int delta_J);
+  virtual std::unique_ptr<lcio::CalorimeterHitImpl> encode(int delta_I, int delta_J);
 
   SimDigitalGeomCellIdPROTO(const SimDigitalGeomCellIdPROTO& toCopy) = delete;
   void operator=(const SimDigitalGeomCellIdPROTO& toCopy) = delete;
 
 protected:
-  virtual void processGeometry(SimCalorimeterHit* hit);
+  virtual void processGeometry(lcio::SimCalorimeterHit* hit);
 
   std::vector<std::string> _encodingString = {"K-1", "", "", "", "I", "J"};
 };

@@ -30,7 +30,7 @@ public:
 
   void init();
 
-  void processEvent(LCEvent* evtP);
+  void processEvent(lcio::LCEvent* evtP);
 
   void end();
 
