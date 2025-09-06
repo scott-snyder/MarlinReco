@@ -10,6 +10,8 @@
 
 #include <algorithm>
 
+using namespace lcio;
+
 ReconstructedParticleParticleIDFilterProcessor aReconstructedParticleParticleIDFilterProcessor;
 
 struct LCParametersFilterAccessor : public IMPL::LCParametersImpl {

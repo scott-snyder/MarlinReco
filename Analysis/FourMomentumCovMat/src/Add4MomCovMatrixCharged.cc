@@ -13,6 +13,8 @@
 
 #include <iomanip>
 
+using namespace lcio;
+
 Add4MomCovMatrixCharged aAdd4MomCovMatrixCharged;
 
 Add4MomCovMatrixCharged::Add4MomCovMatrixCharged() : Processor("Add4MomCovMatrixCharged") {
