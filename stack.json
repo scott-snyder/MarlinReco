@@ -1,7 +1,7 @@
 {
   "version": 5,
-  "prev": "2073c1c6cf4f5bac05148644ce2b8b3b7bd21872",
-  "head": "1559b42a4d1c85c0402050cb7559fc6ded501045",
+  "prev": "db71bd5f03a92ed5280d1851bdd6fab96c285eb0",
+  "head": "ffafdf7e15e75e6f78a06f54eede8521c079a326",
   "applied": [
     "gitignore",
     "nullptr",
@@ -9,11 +9,10 @@
     "paren",
     "clang",
     "nosystem",
-    "using"
-  ],
-  "unapplied": [
+    "using",
     "cmakewarn"
   ],
+  "unapplied": [],
   "hidden": [],
   "patches": {
     "clang": {
