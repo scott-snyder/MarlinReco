@@ -1,0 +1,6 @@
+Bottom: 6d8acc2711218e4641534fadfd82f7459abc0a0e
+Top:    6d8acc2711218e4641534fadfd82f7459abc0a0e
+Author: sss <sss@karma>
+Date:   2025-10-30 13:38:39 -0400
+
+Remove some useless warning messages from cmake.
