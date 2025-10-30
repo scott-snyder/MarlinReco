@@ -1,6 +1,6 @@
 {
   "version": 5,
-  "prev": "6a751f13e9edf7a6395d93f7949a99f0bdfc2846",
+  "prev": "1604447a92888bafa54cb290fe72f74bc93f1586",
   "head": "0ad1486196e2faddbefd5ec8aa7d4c3e963f5cf2",
   "applied": [
     "gitignore",
@@ -10,7 +10,7 @@
     "clang",
     "nosystem",
     "using",
-    "cmakevery"
+    "cmakeverb"
   ],
   "unapplied": [
     "cmakewarn"
@@ -20,7 +20,7 @@
     "clang": {
       "oid": "9af280673fb8b507f8165b89f7432d6889885b8f"
     },
-    "cmakevery": {
+    "cmakeverb": {
       "oid": "0ad1486196e2faddbefd5ec8aa7d4c3e963f5cf2"
     },
     "cmakewarn": {
