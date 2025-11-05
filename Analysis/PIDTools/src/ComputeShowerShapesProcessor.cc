@@ -23,6 +23,8 @@
 
 #include "ComputeShowerShapesProcessor.hh"
 
+using namespace lcio;
+
 ComputeShowerShapesProcessor aComputeShowerShapesProcessor;
 
 ComputeShowerShapesProcessor::ComputeShowerShapesProcessor() : Processor("ComputeShowerShapesProcessor") {
