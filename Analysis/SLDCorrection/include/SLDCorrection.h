@@ -39,10 +39,10 @@ public:
   virtual ~SLDCorrection() = default;
   SLDCorrection(const SLDCorrection&) = delete;
   SLDCorrection& operator=(const SLDCorrection&) = delete;
-  virtual void init();
+  virtual void init() override;
   virtual void Clear();
-  virtual void processRunHeader();
-  virtual void processEvent(EVENT::LCEvent* pLCEvent);
+  virtual void processRunHeader() override;
+  virtual void processEvent(EVENT::LCEvent* pLCEvent) override;
 
   //	hasPrimarySLDecay checks if a MCParticle (potentially a B-/C-Hadron) decays semi-leptonically) true: decays
   // semi-leptonically, false: doesn't decay semi-leptonically
@@ -131,9 +131,9 @@ public:
 
   void checkSLDInput(const MCP& SLDHadron);
 
-  virtual void check(EVENT::LCEvent* pLCEvent);
+  virtual void check(EVENT::LCEvent* pLCEvent) override;
 
-  virtual void end();
+  virtual void end() override;
 
   dd4hep::Detector& _theDetector = dd4hep::Detector::getInstance();
 
