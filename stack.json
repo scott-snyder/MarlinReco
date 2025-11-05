@@ -1,15 +1,15 @@
 {
   "version": 5,
-  "prev": "c9054ed105d21a4683cd5acf8f2cf060af559494",
-  "head": "59b87681b5545a67f6d7fe0a14c534efc1c68891",
+  "prev": "c7eebbfe113873b31587f0e15c68531698f95435",
+  "head": "feb8128388c5a3aae17ce03faf50a760ae5e97f8",
   "applied": [
     "gitignore",
     "nullptr",
     "utf8",
-    "paren"
+    "paren",
+    "clang"
   ],
   "unapplied": [
-    "clang",
     "nosystem",
     "using",
     "cmakeverb",
@@ -18,7 +18,7 @@
   "hidden": [],
   "patches": {
     "clang": {
-      "oid": "9af280673fb8b507f8165b89f7432d6889885b8f"
+      "oid": "feb8128388c5a3aae17ce03faf50a760ae5e97f8"
     },
     "cmakeverb": {
       "oid": "0ad1486196e2faddbefd5ec8aa7d4c3e963f5cf2"
