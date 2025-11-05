@@ -31,9 +31,6 @@
 
 dEdxPoint::dEdxPoint(const double _dE, const double _dx) : dE(_dE), dx(_dx), dEdx(_dE / _dx) {}
 
-dEdxPoint::dEdxPoint(const dEdxPoint& orig)
-    : dE(orig.Get_dE()), dx(orig.Get_dx()), dEdx(orig.Get_dE() / orig.Get_dx()) {}
-
 SiTracker_dEdxProcessor aSiTracker_dEdxProcessor;
 
 SiTracker_dEdxProcessor::SiTracker_dEdxProcessor() : Processor("SiTracker_dEdxProcessor"),
