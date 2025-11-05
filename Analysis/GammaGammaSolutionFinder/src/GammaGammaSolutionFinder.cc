@@ -160,18 +160,17 @@ bool GammaGammaSolutionFinder::FindPFOs(LCEvent* evt) {
 
 // All GammaGammaCandidates
   for (const std::string& name : *evt->getCollectionNames()) {
-     for (unsigned int j=0; j < _gammagammaCandidateCollections.size(); ++j) {    
+     for (unsigned int j=0; j < _gammagammaCandidateCollections.size(); ++j) {
         if(name==_gammagammaCandidateCollections[j]){
            LCCollection* col = evt->getCollection(name);
            unsigned int nelem = col->getNumberOfElements();
            tf = true;
            for(unsigned int i=0;i<nelem;i++){
-	      ReconstructedParticle* recoPart = dynamic_cast<ReconstructedParticle*>(col->getElementAt(i));
+              ReconstructedParticle* recoPart = dynamic_cast<ReconstructedParticle*>(col->getElementAt(i));
 	      _pfovec.push_back(recoPart);
            }
         }
-      }
-    }
+     }
   }
 
   if (_printing > 1)

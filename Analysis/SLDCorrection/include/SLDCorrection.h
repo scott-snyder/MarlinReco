@@ -41,7 +41,7 @@ public:
   SLDCorrection& operator=(const SLDCorrection&) = delete;
   virtual void init() override;
   virtual void Clear();
-  virtual void processRunHeader() override;
+  virtual void processRunHeader(lcio::LCRunHeader*) override;
   virtual void processEvent(EVENT::LCEvent* pLCEvent) override;
 
   //	hasPrimarySLDecay checks if a MCParticle (potentially a B-/C-Hadron) decays semi-leptonically) true: decays
