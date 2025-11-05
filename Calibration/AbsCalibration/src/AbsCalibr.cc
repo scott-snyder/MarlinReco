@@ -306,6 +306,7 @@ double Balance(LCEvent* evt) {
   double e_muonx = 0.;
   double e_muony = 0.;
   double e_muonz = 0.;
+  int n_muon = 0;
 
   double e_elect = 0.;
   double e_electx = 0.;
@@ -371,6 +372,7 @@ double Balance(LCEvent* evt) {
         e_muonx += px;
         e_muony += py;
         e_muonz += pz;
+        n_muon++;
         continue;
       }
       if (abs(idpdg) == 11) { //  e+ e-
@@ -378,7 +380,6 @@ double Balance(LCEvent* evt) {
         e_electx += px;
         e_electy += py;
         e_electz += pz;
-        n_elect++;
         continue;
       }
       if (idpdg == 111) { // Pi0 as stable
@@ -394,7 +395,6 @@ double Balance(LCEvent* evt) {
         e_photonx += px;
         e_photony += py;
         e_photonz += pz;
-        n_photon++;
         continue;
       }
       if (                        // long lived neutral hadrons

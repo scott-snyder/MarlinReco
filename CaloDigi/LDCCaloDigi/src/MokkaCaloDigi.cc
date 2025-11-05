@@ -234,7 +234,6 @@ void MokkaCaloDigi::processEvent(LCEvent* evt) {
       int numElements = col->getNumberOfElements();
       for (int j(0); j < numElements; ++j) {
         SimCalorimeterHit* hit = dynamic_cast<SimCalorimeterHit*>(col->getElementAt(j));
-        simEnergy += hit->getEnergy();
         int cellid = hit->getCellID0();
         int Module = (cellid & MASK_M) >> SHIFT_M; // reed module number on it depends further calculation
         int Stave = (cellid & MASK_S) >> SHIFT_S;  // stave
