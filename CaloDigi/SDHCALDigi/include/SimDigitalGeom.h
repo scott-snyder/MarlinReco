@@ -83,8 +83,8 @@ protected:
   CHT::Layout _currentHCALCollectionCaloLayout = CHT::any;
 
   dd4hep::CellID _cellIDvalue = 0;
-  CellIDDecoder<lcio::SimCalorimeterHit> _decoder;
-  CellIDEncoder<lcio::CalorimeterHitImpl> _encoder;
+  UTIL::CellIDDecoder<lcio::SimCalorimeterHit> _decoder;
+  UTIL::CellIDEncoder<lcio::CalorimeterHitImpl> _encoder;
 
   float _cellSize = 0.0f;
 
@@ -109,7 +109,7 @@ public:
 
 protected:
   void fillDebugTupleGeometryHit();
-  void fillDebugTupleGeometryStep(SimCalorimeterHit* hit, const std::vector<StepAndCharge>& stepsInIJZcoord);
+  void fillDebugTupleGeometryStep(lcio::SimCalorimeterHit* hit, const std::vector<StepAndCharge>& stepsInIJZcoord);
 
   static AIDA::ITuple* _tupleHit;
   enum {
