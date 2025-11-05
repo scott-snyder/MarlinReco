@@ -11,7 +11,7 @@ public:
   ComputeShowerShapesProcessor(const ComputeShowerShapesProcessor&) = delete;
   ComputeShowerShapesProcessor& operator=(const ComputeShowerShapesProcessor&) = delete;
 
-  virtual Processor* newProcessor() { return new ComputeShowerShapesProcessor; }
+  virtual Processor* newProcessor() override { return new ComputeShowerShapesProcessor; }
   ComputeShowerShapesProcessor();
   virtual void init() override;
   virtual void processRunHeader(lcio::LCRunHeader* run) override;

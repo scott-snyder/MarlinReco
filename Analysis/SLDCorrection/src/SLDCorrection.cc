@@ -43,7 +43,7 @@ SLDCorrection::SLDCorrection()
     :
 
       Processor("SLDCorrection"), m_nRun(0), m_nEvt(0), m_nRunSum(0), m_nEvtSum(0), m_Bfield(0.f),
-      foundFlightDirection(true), m_nSLDecayOfBHadron(0), m_nSLDecayOfCHadron(0), m_nSLDecayOfTauLepton(0),
+      m_nSLDecayOfBHadron(0), m_nSLDecayOfCHadron(0), m_nSLDecayOfTauLepton(0),
       m_nSLDecayTotal(0), m_nSLDecayToElectron(0), m_nSLDecayToMuon(0), m_nSLDecayToTau(0), m_nTauNeutrino(0) {
   _description = "SLDCorrection finds semi-leptonic decays within jets and performs a correction to 4-momentum of the "
                  "jet due to the missing neutrino(s)";
@@ -3344,7 +3344,6 @@ MCP SLDCorrection::getTrueNeutrino(const MCP& SLDLepton) {
   MCP trueNeutrino{};
   try {
     MCP MotherHadron = SLDLepton->getParents()[0];
-    int nNeutrinos = 0;
     for (long unsigned int i_daughter = 0; i_daughter < (MotherHadron->getDaughters()).size(); ++i_daughter) {
       MCP daughter = MotherHadron->getDaughters()[i_daughter];
       if (daughter->getGeneratorStatus() == 1 && (abs(daughter->getPDG()) == abs(SLDLepton->getPDG()) + 1)) {
@@ -3355,7 +3354,6 @@ MCP SLDCorrection::getTrueNeutrino(const MCP& SLDLepton) {
         trueNeutrino = daughter;
       }
     }
-    ++nNeutrinos;
   } catch (DataNotAvailableException& e) {
     streamlog_out(MESSAGE) << "	True Neutrino for semi-leptonic decay not found in MCParticles" << std::endl;
   }

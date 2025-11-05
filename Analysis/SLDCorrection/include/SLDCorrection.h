@@ -34,7 +34,7 @@ using namespace marlin;
 
 class SLDCorrection : public Processor {
 public:
-  virtual Processor* newProcessor() { return new SLDCorrection; }
+  virtual Processor* newProcessor() override { return new SLDCorrection; }
   SLDCorrection();
   virtual ~SLDCorrection() = default;
   SLDCorrection(const SLDCorrection&) = delete;
@@ -207,7 +207,6 @@ private:
   int m_nRunSum;
   int m_nEvtSum;
   double m_Bfield;
-  bool foundFlightDirection;
   IntVector m_SLDFlavour{};  // 4: SLDecayOfCHadron, 5: SLDecayOfBHadron, 15: SLDecayOfTauLepton
   IntVector m_SLDType{};     // 0: SLDecay with DownStream/UpStream semi-leptonic decay(s), 1: SLDecay without
                              // DownStream/UpStream semi-leptonic decay(s)
