@@ -20,7 +20,7 @@ public:
   virtual void end() override;
 
 private:
-  lcio::ClusterShapes* pClusterShapes{};
+  ClusterShapes* pClusterShapes{};
   std::string _PfoCollection{};
   std::string _ClusterCollection{};
   float _X01{}, _X02{};
