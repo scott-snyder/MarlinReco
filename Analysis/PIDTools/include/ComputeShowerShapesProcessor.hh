@@ -16,7 +16,7 @@ public:
 
   virtual Processor* newProcessor() { return new ComputeShowerShapesProcessor; }
   ComputeShowerShapesProcessor();
-  virtual void init(LCEvent* evt) override;
+  virtual void init() override;
   virtual void processRunHeader(LCRunHeader* run) override;
   virtual void processEvent(LCEvent* evt) override;
   virtual void check(LCEvent* evt) override;
