@@ -16,7 +16,7 @@ public:
 protected:
   virtual void init();
 
-  LCCollectionVec* processCollection(lcio::LCCollection* inputCol, lcio::LCCollection* inputRelCol);
+  lcio::LCCollectionVec* processCollection(lcio::LCCollection* inputCol, lcio::LCCollection* inputRelCol);
 
   std::vector<std::string> _inputCollections{};     // input CalorimeterHit collection
   std::vector<std::string> _inputRelCollections{};  // input CalorimeterHit to SimCalorimeterHit relation collection
