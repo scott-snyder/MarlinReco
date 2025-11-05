@@ -508,7 +508,6 @@ std::vector<CalorimeterHit*> hybridRecoProcessor::getVirtualHits(LCEvent* evt, C
               h_stripDist_nointercept->Fill(dist / _stripLength);
           }
           if (intercept.Mag() > 0) { // intercept found, calculate in which virtual cell
-            nSplitters++;
             float frac(-1);
             for (int k = 0; k < 3; k++) {
               float dx = stripEnds.second[k] - stripEnds.first[k];
