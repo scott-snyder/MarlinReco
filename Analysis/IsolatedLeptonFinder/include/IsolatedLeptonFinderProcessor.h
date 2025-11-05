@@ -39,10 +39,10 @@ public:
 
 protected:
   /** Returns true if pfo is a lepton */
-  bool IsGoodLepton(ReconstructedParticle* pfo);
+  bool IsGoodLepton(lcio::ReconstructedParticle* pfo);
 
   /** Returns true if pfo is an isolated lepton */
-  bool IsIsolatedLepton(ReconstructedParticle* pfo);
+  bool IsIsolatedLepton(lcio::ReconstructedParticle* pfo);
 
   /** Returns true if isolated, as defined by the cone energy */
   bool IsIsolatedRectangular(lcio::ReconstructedParticle* pfo);
@@ -104,7 +104,7 @@ protected:
   /** Output collection of dressed isolated leptons */
   std::string _outputDressedIsoLepCollection{};
 
-  LCCollection* _pfoCol = nullptr;
+  lcio::LCCollection* _pfoCol = nullptr;
   float _cosConeAngle = 0;
   std::vector<lcio::ReconstructedParticle*> _workingList = {};
 
