@@ -23,7 +23,6 @@ public:
   std::vector<float> updateChargedPFOCovMat(EVENT::Track* track, double mass);
 
 private:
-  int _nEvt{};
   double _bField{};
 };
 
