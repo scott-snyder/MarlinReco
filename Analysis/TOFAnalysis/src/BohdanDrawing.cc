@@ -379,7 +379,7 @@ void plotTrackParams(const std::vector<HitState>& trackHitStates, EVENT::MCParti
   auto omega2pt = [bField](float omega) { return 0.000299792458 * bField / omega; };
   auto pt2omega = [bField](float pt) { return 0.000299792458 * bField / pt; };
 
-  auto tanL2theta = [bField](float tanL) { return 90. - 180. * std::atan(tanL) / M_PI; };
+  auto tanL2theta = [](float tanL) { return 90. - 180. * std::atan(tanL) / M_PI; };
 
   TStyle* myStyle = getMyStyle();
 
