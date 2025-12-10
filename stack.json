@@ -1,8 +1,9 @@
 {
   "version": 5,
-  "prev": "01ce4b4531799832a6bfe38e3ee793c114b6fd60",
-  "head": "5a0d3990adcd533cf6b27b4a7b9ce1cc543406f5",
-  "applied": [
+  "prev": "105f5d0b353ab878c925f181ac891e7453b1c572",
+  "head": "8d28454ec3984ebb815af7911bf1c346ad249784",
+  "applied": [],
+  "unapplied": [
     "gitignore",
     "nullptr",
     "utf8",
@@ -12,7 +13,6 @@
     "cmakeverb",
     "cmakewarn"
   ],
-  "unapplied": [],
   "hidden": [],
   "patches": {
     "clang": {
