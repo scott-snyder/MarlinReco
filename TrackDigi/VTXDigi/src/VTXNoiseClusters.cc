@@ -1,5 +1,8 @@
 /* -*- Mode: C++; tab-width: 2; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
 // #ifdef USE_ROOT
+#if __GNUC__ >= 16
+# pragma GCC diagnostic ignored "-Warray-bounds"
+#endif
 #include "VTXNoiseClusters.h"
 #include "VXDClusterParameters.h"
 
