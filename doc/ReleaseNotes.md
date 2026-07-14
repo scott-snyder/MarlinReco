@@ -1,3 +1,20 @@
+# v01-38-01
+
+* 2026-06-08 Bohdan Dudar ([PR#159](https://github.com/iLCSoft/MarlinReco/pull/159))
+  - Fix TOFEstimattor processor crash, if Track object with no subtracks is encountered.
+
+* 2026-03-27 Bohdan Dudar ([PR#158](https://github.com/iLCSoft/MarlinReco/pull/158))
+  - Fix #157
+
+* 2025-12-23 Thomas Madlener ([PR#156](https://github.com/iLCSoft/MarlinReco/pull/156))
+  - Fix potential segfault in `WWCategorisationProcessor` if `ConfusionMatrixFileName` is set to an empty string
+
+* 2025-12-22 Yuyang Zhang ([PR#155](https://github.com/iLCSoft/MarlinReco/pull/155))
+  - Fixes several related issues caused by comparing copied reconstructed particles with originals by pointer identity
+  - Avoids self-counting in isolation cone energy
+  - Ensures jet-based isolation uses original PFOs
+  - Completes copying of tracks and clusters when duplicating PFOs
+
 # v01-38
 
 * 2025-11-10 Bohdan Dudar ([PR#141](https://github.com/iLCSoft/MarlinReco/pull/141))
