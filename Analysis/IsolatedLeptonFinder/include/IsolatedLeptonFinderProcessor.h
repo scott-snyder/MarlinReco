@@ -38,7 +38,7 @@ public:
 
 private:
   /// Return the original PFO if this particle is a copy, otherwise return itself
-  ReconstructedParticle* findOriginal(ReconstructedParticle* pfo) const;
+  lcio::ReconstructedParticle* findOriginal(lcio::ReconstructedParticle* pfo) const;
 
 protected:
   /** Returns true if pfo is a lepton */
@@ -186,7 +186,7 @@ protected:
    * This map is therefore used to recover the association to the original
    * PFO when computing isolation-related quantities.
    */
-  std::map<ReconstructedParticle*, ReconstructedParticle*> _copy2orig;
+  std::map<lcio::ReconstructedParticle*, lcio::ReconstructedParticle*> _copy2orig;
 };
 
 #endif
