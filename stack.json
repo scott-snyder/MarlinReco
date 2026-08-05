@@ -1,7 +1,7 @@
 {
   "version": 5,
-  "prev": "6d48ea06bba0d36756993276a6c0bf4dbd775951",
-  "head": "caf144ef56e2b0b80a2befc331d275bd24d70721",
+  "prev": "8b86696703c8a23f16e6f0ece918177b909f52ad",
+  "head": "56a148b3efe40db7c224876334e9527fb62b4f73",
   "applied": [
     "gitignore",
     "nullptr",
@@ -12,7 +12,8 @@
     "cmakeverb",
     "cmakewarn",
     "warn",
-    "gccbug-newxx"
+    "gccbug-newxx",
+    "refresh-temp"
   ],
   "unapplied": [],
   "hidden": [],
@@ -37,6 +38,9 @@
     },
     "nullptr": {
       "oid": "1bf6b68ffda013a5a1ed9ee998d1e5074db955c9"
+    },
+    "refresh-temp": {
+      "oid": "56a148b3efe40db7c224876334e9527fb62b4f73"
     },
     "using": {
       "oid": "33b8553235642c957ec24b4b4a98d82ba540e8e0"
