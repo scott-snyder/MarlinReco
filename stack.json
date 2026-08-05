@@ -1,7 +1,7 @@
 {
   "version": 5,
-  "prev": "8b86696703c8a23f16e6f0ece918177b909f52ad",
-  "head": "56a148b3efe40db7c224876334e9527fb62b4f73",
+  "prev": "db958eee79ead6555100ab66163a61a80d10e69e",
+  "head": "5a31a28d65e8108ff17f5176e0601f1a46b775c1",
   "applied": [
     "gitignore",
     "nullptr",
@@ -12,8 +12,7 @@
     "cmakeverb",
     "cmakewarn",
     "warn",
-    "gccbug-newxx",
-    "refresh-temp"
+    "gccbug-newxx"
   ],
   "unapplied": [],
   "hidden": [],
@@ -22,13 +21,13 @@
       "oid": "684e3edef412fbe6ac0ba33d7f437d9c3b166a99"
     },
     "cmakeverb": {
-      "oid": "1e2ff25dd4f9775a17fbf135ee3cf593995a1fc7"
+      "oid": "e12f8e426a7e63459c3d46556af5eec2fbaf2537"
     },
     "cmakewarn": {
-      "oid": "66dd8bea1a65045a4186180586d167eecdfc7e15"
+      "oid": "9af1c3b5b2dc1de3d3e039ee62dd125fa4c81a7c"
     },
     "gccbug-newxx": {
-      "oid": "caf144ef56e2b0b80a2befc331d275bd24d70721"
+      "oid": "5a31a28d65e8108ff17f5176e0601f1a46b775c1"
     },
     "gitignore": {
       "oid": "30ebd80af63c67e7f6eb517c83203a380fd55be8"
@@ -39,17 +38,14 @@
     "nullptr": {
       "oid": "1bf6b68ffda013a5a1ed9ee998d1e5074db955c9"
     },
-    "refresh-temp": {
-      "oid": "56a148b3efe40db7c224876334e9527fb62b4f73"
-    },
     "using": {
-      "oid": "33b8553235642c957ec24b4b4a98d82ba540e8e0"
+      "oid": "5c03bb598c3b5067b27a3c98964f5f022cea0e68"
     },
     "utf8": {
       "oid": "5e9b0fca1be238936affd751028a3ca5429afc31"
     },
     "warn": {
-      "oid": "3d4c7bc8d9eafca2abc470368233ebab5e7564d0"
+      "oid": "8dfca1020daf160a1eeb3a20d59eca54d3a2bb30"
     }
   }
 }
