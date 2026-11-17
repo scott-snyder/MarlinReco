@@ -1,8 +1,9 @@
 {
   "version": 5,
-  "prev": "db958eee79ead6555100ab66163a61a80d10e69e",
-  "head": "5a31a28d65e8108ff17f5176e0601f1a46b775c1",
-  "applied": [
+  "prev": "300a1196ce55b8a10a19c5cd231fab82c621e99b",
+  "head": "fe8e9e2d08b47048e639c072b7bce97f9847f7d1",
+  "applied": [],
+  "unapplied": [
     "gitignore",
     "nullptr",
     "utf8",
@@ -14,7 +15,6 @@
     "warn",
     "gccbug-newxx"
   ],
-  "unapplied": [],
   "hidden": [],
   "patches": {
     "clang": {
