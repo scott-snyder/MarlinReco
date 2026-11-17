@@ -33,9 +33,9 @@ public:
   CheatedMCOverlayRemoval(const CheatedMCOverlayRemoval&) = delete;
   CheatedMCOverlayRemoval& operator=(const CheatedMCOverlayRemoval&) = delete;
   virtual void init();
-  virtual void processRunHeader();
+  virtual void processRunHeader(lcio::LCRunHeader*);
   virtual void processEvent(EVENT::LCEvent* pLCEvent);
-  virtual void check();
+  virtual void check(lcio::LCEvent*);
   EVENT::MCParticle* getLinkedMCP(EVENT::ReconstructedParticle* recoParticle,
                                   const LCRelationNavigator& RecoMCParticleNav,
                                   const LCRelationNavigator& MCParticleRecoNav, float& weightPFOtoMCP,

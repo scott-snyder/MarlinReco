@@ -52,7 +52,7 @@ void CheatedMCOverlayRemoval::Clear() {
   m_nMCPs = 0;
 }
 
-void CheatedMCOverlayRemoval::processRunHeader() {
+void CheatedMCOverlayRemoval::processRunHeader( LCRunHeader* ) {
   streamlog_out(DEBUG0) << "   processRunHeader called" << std::endl;
   m_nRun++;
   streamlog_out(DEBUG0) << "   processRunHeader finished successfully" << std::endl;
@@ -274,7 +274,7 @@ EVENT::ReconstructedParticle* CheatedMCOverlayRemoval::getLinkedPFO(EVENT::MCPar
   }
 }
 
-void CheatedMCOverlayRemoval::check() {
+void CheatedMCOverlayRemoval::check( LCEvent* ) {
   // nothing to check here - could be used to fill checkplots in reconstruction processor
 }
 
