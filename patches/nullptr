@@ -1,6 +1,6 @@
-Bottom: 77eb86cb644e23f347ed08139f488a7db02ad093
-Top:    71b977278a85dcd4d9e926bf7711fa421cb28155
+Bottom: a1fd44a9502c15393c09bc2418a6283084248856
+Top:    2c4c7aedac9da5dfa769dbd0cf4308a153d33e96
 Author: scott snyder <sss@karma>
-Date:   2026-08-05 15:39:48 -0400
+Date:   2026-11-16 22:38:52 -0500
 
 Protections against null pointer dereference.
